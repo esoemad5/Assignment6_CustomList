@@ -321,8 +321,70 @@ namespace CustomListTest
 
 
         // +
-        //Add 2 objects
-        //Add 2 objects, one is empty
+        [TestMethod]
+        public void AdditionOperatorOverload_TwoNonEmptyLists_ConcatenatedList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+            list2.Add(6);
+
+            int[] expectedResult = new int[] { 1, 2, 3, 4, 5, 6, };
+            //Act
+            int[] result = (list1 + list2).Data;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        public void AdditionOperatorOverload_OneListIsEmpty_TheNonEmptyList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+
+            int[] expectedResult = new int[] { 1, 2, 3 };
+            //Act
+            int[] result = (list1 + list2).Data;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        public void AdditionOperatorOverload_OtherListIsEmpty_TheNonEmptyList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list2.Add(1);
+            list2.Add(2);
+            list2.Add(3);
+
+            int[] expectedResult = new int[] { 1, 2, 3 };
+            //Act
+            int[] result = (list1 + list2).Data;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        public void AdditionOperatorOverload_BothListsAreEmpty_EmptyList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+
+            int[] expectedResult = new int[] {};
+            //Act
+            int[] result = (list1 + list2).Data;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
 
         // -
         //Minuend contains part or all of the subtrahend
