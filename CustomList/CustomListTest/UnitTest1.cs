@@ -59,6 +59,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
+        [TestMethod]
         public void Add_Add100ValuesToEmptyList_50thValueGoesTo50thIndex()
         {
             //Arrange
@@ -78,6 +79,7 @@ namespace CustomListTest
 
 
         // Count
+        [TestMethod]
         public void Count_NewObject_0()
         {
             //Arrange
@@ -150,6 +152,7 @@ namespace CustomListTest
             Assert.IsTrue(!result);
         }
 
+        [TestMethod]
         public void Remove_RemoveFromNewList_0()
         {
             //Arrange
@@ -162,6 +165,19 @@ namespace CustomListTest
             int result = customList.Count;
             //Assert
             Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void Remove_RemoveFromEmptyList_False()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(99);
+            customList.Remove(99);
+            //Act
+            bool result = customList.Remove(6);
+            //Assert
+            Assert.IsTrue(!result);
         }
 
         [TestMethod]
