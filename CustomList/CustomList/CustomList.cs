@@ -14,7 +14,7 @@ namespace CustomList
         {
 
         }
-        public T Data { get; set; }
+        public T Data { get ; set; }
 
         public void Add(T input)
         {
