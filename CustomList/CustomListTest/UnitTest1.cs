@@ -56,17 +56,62 @@ namespace CustomListTest
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
+        public void Add_Add100ValuesToEmptyList_50thValueGoesTo50thIndex()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+
+            int expectedResult = 49;
+            //Act
+            for(int i = 0; i < 100; i++)
+            {
+                customList.Add(i);
+            }
+
+            int result = customList[49];
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        public void Count_EmptyList_0()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+
+            int expectedResult = 0;
+            //Act
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
         [TestMethod]
         public void Count_Length1List_1()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
             int value = 16;
+            customList.Add(value);
 
             int expectedResult = 1;
             //Act
-            customList.Add(value);
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
 
+        [TestMethod]
+        public void Count_Length100List_100()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            for(int i = 0; i < 100; i++)
+            {
+                customList.Add(i);/////////////////////////////////////////////////////////////////////////
+            }
+
+            int expectedResult = 100;
+            //Act
             int result = customList.Count;
             //Assert
             Assert.AreEqual(expectedResult, result);
