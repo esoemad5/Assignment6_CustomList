@@ -10,11 +10,9 @@ namespace CustomList
     {
         private T[] data;
         public T[] Data { get => data; }
-        public int Count { get => GetCount(); }
-        private int GetCount()
-        {
+        private int count;
+        public int Count { get => count; }
 
-        }
         public T this[int i] { get => data[i]; set => data[i] = value; }// indexer
 
         public void Add(T input)

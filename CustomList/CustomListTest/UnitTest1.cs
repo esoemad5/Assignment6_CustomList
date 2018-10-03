@@ -463,7 +463,7 @@ namespace CustomListTest
             //Assert
             Assert.IsTrue(ArraysAreEqual(expectedResult, result));
         }
-        //Both minuend and subtrahend are empty
+
         [TestMethod]
         public void SubtractionOperatorOverload_BothMinuendAndSubtrahendAreEmpty_EmptyList()
         {
@@ -498,7 +498,7 @@ namespace CustomListTest
             //Act
             int[] result = CustomList<int>.Zip(customList1, customList2).Data;
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ArraysAreEqual<int>(expectedResult, result));
         }
 
         [TestMethod]
@@ -652,7 +652,7 @@ namespace CustomListTest
         */
 
         // Assert.IsTrue(ArraysAreEqual(expectedResult, result));
-        private bool ArraysAreEqual(T[] arr1, int[] arr2)
+        private bool ArraysAreEqual<T>(T[] arr1, T[] arr2)
         {
             if(arr1.Length != arr2.Length)
             {
@@ -660,13 +660,18 @@ namespace CustomListTest
             }
             for(int i = 0; i < arr1.Length; i++)
             {
-                if(arr1[i] != arr2[i])
+                if(!arr1[i].Equals(arr2[i]))
                 {
                     return false;
                 }
             }
             return true;
         }
+
+        /*
+         * Null = {}
+         * Testing true/false
+         * */
        
     }
 }
