@@ -581,11 +581,11 @@ namespace CustomListTest
             CustomList<int> customList1 = new CustomList<int>();
             CustomList<int> customList2 = new CustomList<int>();
 
-            int[] expectedResult = new int[] {};
+            CustomList<int> expectedResult = new CustomList<int>();
             //Act
-            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         // Indexer
@@ -652,7 +652,7 @@ namespace CustomListTest
         }
         */
 
-        // Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        // Assert.IsTrue(ListsAreEqual(expectedResult, result));
         private bool ListsAreEqual<T>(CustomList<T> list1, CustomList<T> list2)
         {
             if(list1.Count != list2.Count)
@@ -669,6 +669,7 @@ namespace CustomListTest
             return true;
         }
         /* used this method when Data was a property
+         * Assert.IsTrue(ArraysAreEqual(expectedResult, result));
         private bool ArraysAreEqual<T>(T[] arr1, T[] arr2)
         {
             if(arr1.Length != arr2.Length)
@@ -689,6 +690,6 @@ namespace CustomListTest
         /*
          * Review remove tests
          * */
-       
+
     }
 }
