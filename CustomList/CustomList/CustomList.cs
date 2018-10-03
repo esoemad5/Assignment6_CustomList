@@ -9,7 +9,6 @@ namespace CustomList
     public class CustomList<T>
     {
         private T[] data;
-        public T[] Data { get => data; }
         private int count;
         public int Count { get => count; }
 
