@@ -7,6 +7,8 @@ namespace CustomListTest
     [TestClass]
     public class UnitTest1
     {
+        // Add
+        [TestMethod]
         public void Add_ValueToEmptyList_ValueInList()
         {
             //Arrange
@@ -56,6 +58,7 @@ namespace CustomListTest
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
+
         public void Add_Add100ValuesToEmptyList_50thValueGoesTo50thIndex()
         {
             //Arrange
@@ -73,6 +76,8 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
+
+        // Count
         public void Count_NewObject_0()
         {
             //Arrange
@@ -132,6 +137,61 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        
+
+        // Remove
+        [TestMethod]
+        public void Remove_RemoveFromNewList_False()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            //Act
+            bool result = customList.Remove(6);
+            //Assert
+            Assert.IsTrue(!result);
+        }
+
+        public void Remove_RemoveFromNewList_0()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+
+            int expectedResult = 0;
+            //Act
+            customList.Remove(6);
+
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void Remove_RemoveFromEmptyList_0()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(99);
+            customList.Remove(99);
+
+            int expectedResult = 0;
+            //Act
+            customList.Remove(99);
+
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+
+        // Template
+        [TestMethod]
+        public void __()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            //Act
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+       
     }
 }
