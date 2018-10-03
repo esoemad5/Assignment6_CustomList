@@ -148,15 +148,46 @@ namespace CustomListTest
             //Arrange
             CustomList<int> customList = new CustomList<int>();
             int[] expectedResult = customList.Data;
-
             customList.Add(1);
-
             //Act
             customList.Remove(1);
+            int[] result = customList.Data;
             //Assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
         }
 
+        [TestMethod]
+        public void Remove_ListContains1OfTheTarget_ListSansTarget() // Should I test when target is at begining/middle/end? with large/small lists?
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(2);
+
+            int[] expectedResult = new int[] { 2 };
+            //Act
+            customList.Remove(1);
+            int[] result = customList.Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Remove_ListContainsMultipleOfTheTarget_ListSans1stOccurrence()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(2);
+            customList.Add(1);
+
+            int[] expectedResult = new int[] { 2, 1 };
+            //Act
+            customList.Remove(1);
+            int[] result = customList.Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
 
         [TestMethod]
         public void Remove_RemoveFromNewList_False()
@@ -166,7 +197,7 @@ namespace CustomListTest
             //Act
             bool result = customList.Remove(6);
             //Assert
-            Assert.IsTrue(!result);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
@@ -194,7 +225,7 @@ namespace CustomListTest
             //Act
             bool result = customList.Remove(6);
             //Assert
-            Assert.IsTrue(!result);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
@@ -224,6 +255,22 @@ namespace CustomListTest
             //Act
             //Assert
             Assert.AreEqual(expectedResult, result);
+        }
+
+        private bool ArraysAreEqual(T[] arr1, T[] arr2)
+        {
+            if(arr1.Length != arr2.Length)
+            {
+                return false;
+            }
+            for(int i = 0; i < arr1.Length; i++)
+            {
+                if(arr1[i] != arr2[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
        
     }
