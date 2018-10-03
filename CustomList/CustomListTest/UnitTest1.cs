@@ -146,13 +146,14 @@ namespace CustomListTest
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
-            int[] expectedResult = customList.Data;
             customList.Add(1);
+
+            int expectedResult = 0;
             //Act
             customList.Remove(1);
-            int[] result = customList.Data;
+            int result = customList.Count;
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
@@ -652,6 +653,22 @@ namespace CustomListTest
         */
 
         // Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        private bool ListsAreEqual<T>(CustomList<T> list1, CustomList<T> list2)
+        {
+            if(list1.Count != list2.Count)
+            {
+                return false;
+            }
+            for(int i = 0; i < list1.Count; i++)
+            {
+                if (!list1[i].Equals(list2[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        /* used this method when Data was a property
         private bool ArraysAreEqual<T>(T[] arr1, T[] arr2)
         {
             if(arr1.Length != arr2.Length)
@@ -667,10 +684,10 @@ namespace CustomListTest
             }
             return true;
         }
+        */
 
         /*
-         * Null = {}
-         * Testing true/false
+         * Review remove tests
          * */
        
     }
