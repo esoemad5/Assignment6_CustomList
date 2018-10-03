@@ -141,6 +141,23 @@ namespace CustomListTest
 
 
         // Remove
+
+        [TestMethod]
+        public void Remove_ListOnlyContainsObject_EmptyList()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            int[] expectedResult = customList.Data;
+
+            customList.Add(1);
+
+            //Act
+            customList.Remove(1);
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+
         [TestMethod]
         public void Remove_RemoveFromNewList_False()
         {

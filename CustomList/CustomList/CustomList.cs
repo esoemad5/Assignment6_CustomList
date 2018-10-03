@@ -9,12 +9,13 @@ namespace CustomList
     public class CustomList<T>
     {
         private T[] data;
+        public T[] Data { get => data; }
         public int Count { get => GetCount(); }
         private int GetCount()
         {
 
         }
-        public T Data { get ; set; }// indexer
+        public T this[int i] { get => data[i]; set => data[i] = value; }// indexer
 
         public void Add(T input)
         {
