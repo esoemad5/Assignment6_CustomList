@@ -157,7 +157,19 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void Remove_ListContains1OfTheTarget_ListSansTarget() // Should I test when target is at begining/middle/end? with large/small lists?
+        public void Remove_ListOnlyContainsObject_True() // only check for true in this one case.  This tests ensures the method returns true if an object is removed. Other cases test if object is removed in specific conditions. If the object is removed under specific conditions and this test passed, there should be no reason the true/false test would fail for the specific conditions.
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            //Act
+            bool result = customList.Remove(1);
+            //Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Remove_ListContains1OfTheTargetAtTheBegining_ListSansTarget()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
@@ -245,6 +257,61 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
+        // ToString
+        // +
+        // -
+        // Zip
+        // Indexer
+        [TestMethod]
+        public void IndexerGet_1ElementList_ValueAtIndex()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(5);
+
+            int expectedResult = 5;
+            //Act
+            int result = customList[0];
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod][ExpectedException(typeof(IndexOutOfRangeException))]
+        public void IndexerGet_0ElementList_IndexOutOfRangeException()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            //Act
+            int test = customList[0];
+        }
+
+        [TestMethod]
+        public void IndexerSet_1ElementList_ValueSpecified()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(5);
+
+            int expectedResult = 6;
+            //Act
+            customList[0] = 6;
+
+            int result = customList[0];
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void IndexerSet_0ElementList_IndexOutOfRangeException()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            //Act
+            customList[0] = 5;
+        }
+
+        // Iterable
+
 
         // Template
         [TestMethod]
@@ -257,7 +324,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        private bool ArraysAreEqual(T[] arr1, T[] arr2)
+        private bool ArraysAreEqual(T[] arr1, int[] arr2) // pls
         {
             if(arr1.Length != arr2.Length)
             {
