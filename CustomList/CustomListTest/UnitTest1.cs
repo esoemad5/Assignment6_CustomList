@@ -390,11 +390,94 @@ namespace CustomListTest
         }
 
         // -
-        //Minuend contains part or all of the subtrahend
-        //Minuend contains none of the subtrahend
-        //Minuend is empty, subtrahend is not
-        //Subtrahend is empty, minuend is not
+        [TestMethod]
+        public void SubtractionOperatorOverload_MinuendContainsPartOrAllOfTheSubtrahend_ShortenedList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+
+            int[] expectedResult = new int[] { 1, 2 };
+            //Act
+            int[] result = (list1 - list2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_MinuendContainsNoneOfTheSubtrahend_OriginalList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+            list2.Add(6);
+
+            int[] expectedResult = new int[] { 1, 2, 3 };
+            //Act
+            int[] result = (list1 - list2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_MinuendIsEmptySubtrahendIsNot_EmptyList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list2.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+
+            int[] expectedResult = new int[] { };
+            //Act
+            int[] result = (list1 - list2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_SubtrahendIsEmptyMinuendIsNot_OriginalList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(3);
+            list1.Add(4);
+            list1.Add(5);
+
+            int[] expectedResult = new int[] { 3, 4, 5 };
+            //Act
+            int[] result = (list1 - list2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
         //Both minuend and subtrahend are empty
+        [TestMethod]
+        public void SubtractionOperatorOverload_BothMinuendAndSubtrahendAreEmpty_EmptyList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+
+            int[] expectedResult = new int[] { };
+            //Act
+            int[] result = (list1 - list2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
 
         // Zip
         [TestMethod]
