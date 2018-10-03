@@ -338,9 +338,10 @@ namespace CustomListTest
             //Act
             int[] result = (list1 + list2).Data;
             //Assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
         }
 
+        [TestMethod]
         public void AdditionOperatorOverload_OneListIsEmpty_TheNonEmptyList()
         {
             //Arrange
@@ -354,9 +355,10 @@ namespace CustomListTest
             //Act
             int[] result = (list1 + list2).Data;
             //Assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
         }
 
+        [TestMethod]
         public void AdditionOperatorOverload_OtherListIsEmpty_TheNonEmptyList()
         {
             //Arrange
@@ -370,9 +372,10 @@ namespace CustomListTest
             //Act
             int[] result = (list1 + list2).Data;
             //Assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
         }
 
+        [TestMethod]
         public void AdditionOperatorOverload_BothListsAreEmpty_EmptyList()
         {
             //Arrange
@@ -383,7 +386,7 @@ namespace CustomListTest
             //Act
             int[] result = (list1 + list2).Data;
             //Assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
         }
 
         // -
@@ -447,6 +450,54 @@ namespace CustomListTest
             customList2.Add(6);
 
             int[] expectedResult = new int[] { 1, 2, 4, 6 };
+            //Act
+            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Zip_OneListIsEmpty_OriginalList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+            customList1.Add(1);
+            customList1.Add(3);
+            customList1.Add(5);
+
+            int[] expectedResult = new int[] { 1, 3, 5 };
+            //Act
+            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Zip_OtherListIsEmpty_OriginalList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+            customList2.Add(1);
+            customList2.Add(3);
+            customList2.Add(5);
+
+            int[] expectedResult = new int[] { 1, 3, 5 };
+            //Act
+            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Zip_BothListsareEmpty_EmptyList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+
+            int[] expectedResult = new int[] {};
             //Act
             int[] result = CustomList<int>.Zip(customList1, customList2).Data;
             //Assert
