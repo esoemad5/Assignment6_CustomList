@@ -37,7 +37,7 @@ namespace CustomList
         {
 
         }
-        public static Zip(CustomList<T> customListA, CustomList<T> customListB)
+        public static CustomList<T> Zip(CustomList<T> customListA, CustomList<T> customListB) 
         {
 
         }

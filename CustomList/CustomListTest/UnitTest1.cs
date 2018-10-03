@@ -141,7 +141,6 @@ namespace CustomListTest
 
 
         // Remove
-
         [TestMethod]
         public void Remove_ListOnlyContainsObject_EmptyList()
         {
@@ -179,6 +178,23 @@ namespace CustomListTest
             int[] expectedResult = new int[] { 2 };
             //Act
             customList.Remove(1);
+            int[] result = customList.Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Remove_ListContains1OfTheTargetAtTheEnd_ListSansTarget()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(2);
+            customList.Add(3);
+
+            int[] expectedResult = new int[] { 1, 2 };
+            //Act
+            customList.Remove(3);
             int[] result = customList.Data;
             //Assert
             Assert.IsTrue(ArraysAreEqual(expectedResult, result));
@@ -258,9 +274,123 @@ namespace CustomListTest
         }
 
         // ToString
+        [TestMethod]
+        public void ToString_3Elements_StringComprisedOfTheElements()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(2);
+            customList.Add(3);
+
+            string expectedResult = "123";
+            //Act
+            string result = customList.ToString();
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void ToString_NewObject_EmptyString()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+
+            string expectedResult = "";
+            //Act
+            string result = customList.ToString();
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void ToString_Length0Array_EmptyString()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Remove(1);
+
+            string expectedResult = "";
+            //Act
+            string result = customList.ToString();
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+
+
         // +
+        //Add 2 objects
+        //Add 2 objects, one is empty
+
         // -
+        //Minuend contains part or all of the subtrahend
+        //Minuend contains none of the subtrahend
+        //Minuend is empty, subtrahend is not
+        //Subtrahend is empty, minuend is not
+        //Both minuend and subtrahend are empty
+
         // Zip
+        [TestMethod]
+        public void Zip_ListsOfEqualLengths_ZippedList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+            customList1.Add(1);
+            customList1.Add(3);
+            customList1.Add(5);
+
+            customList2.Add(2);
+            customList2.Add(4);
+            customList2.Add(6);
+
+            int[] expectedResult = new int[] { 1, 2, 3, 4, 5, 6 };
+            //Act
+            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Zip_List1LongerThanList2_ZippedList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+            customList1.Add(1);
+            customList1.Add(3);
+            customList1.Add(5);
+
+            customList2.Add(2);
+
+            int[] expectedResult = new int[] { 1, 2, 3, 5 };
+            //Act
+            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Zip_List1ShorterThanList2_ZippedList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+            customList1.Add(1);
+
+            customList2.Add(2);
+            customList2.Add(4);
+            customList2.Add(6);
+
+            int[] expectedResult = new int[] { 1, 2, 4, 6 };
+            //Act
+            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            //Assert
+            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        }
+
         // Indexer
         [TestMethod]
         public void IndexerGet_1ElementList_ValueAtIndex()
@@ -275,6 +405,7 @@ namespace CustomListTest
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
+
         [TestMethod][ExpectedException(typeof(IndexOutOfRangeException))]
         public void IndexerGet_0ElementList_IndexOutOfRangeException()
         {
@@ -300,8 +431,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [TestMethod][ExpectedException(typeof(IndexOutOfRangeException))]
         public void IndexerSet_0ElementList_IndexOutOfRangeException()
         {
             //Arrange
@@ -313,7 +443,7 @@ namespace CustomListTest
         // Iterable
 
 
-        // Template
+        /* Template
         [TestMethod]
         public void __()
         {
@@ -323,8 +453,10 @@ namespace CustomListTest
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
+        */
 
-        private bool ArraysAreEqual(T[] arr1, int[] arr2) // pls
+        // Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+        private bool ArraysAreEqual(T[] arr1, int[] arr2)
         {
             if(arr1.Length != arr2.Length)
             {
