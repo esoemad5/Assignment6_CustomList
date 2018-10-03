@@ -14,13 +14,13 @@ namespace CustomList
         {
 
         }
-        public T Data { get ; set; }
+        public T Data { get ; set; }// indexer
 
         public void Add(T input)
         {
 
         }
-        public void Remove(T input)
+        public bool Remove(T input) // Removes the 1st occurrence of the object, true if removed, false if not found
         {
 
         }

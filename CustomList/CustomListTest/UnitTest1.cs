@@ -73,10 +73,25 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
+        public void Count_NewObject_0()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+
+            int expectedResult = 0;
+            //Act
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
         public void Count_EmptyList_0()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Remove(1);
 
             int expectedResult = 0;
             //Act
@@ -107,7 +122,7 @@ namespace CustomListTest
             CustomList<int> customList = new CustomList<int>();
             for(int i = 0; i < 100; i++)
             {
-                customList.Add(i);/////////////////////////////////////////////////////////////////////////
+                customList.Add(i);
             }
 
             int expectedResult = 100;
