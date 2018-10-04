@@ -61,29 +61,21 @@ namespace CustomList
         }
         public bool Remove(T input) // Removes the 1st occurrence of the object, true if removed, false if not found
         {
+            // Are these if statements ok???
             T[] newData = new T[data.Length];
-            bool returnBool = false;
+            bool foundTarget = false;
 
             for(int i = 0; i < count; i++)
             {
-                if(data[i].Equals(input) && !returnBool)
-                {
-                    count--;
-                    returnBool = true;
-                }
+                if(data[i].Equals(input) && !foundTarget) { foundTarget = true; }
                 else
                 {
-                    if (returnBool)
-                    {
-                        newData[i - 1] = data[i];
-                    }
-                    else
-                    {
-                        newData[i] = data[i];
-                    }
+                    if (foundTarget) { newData[i - 1] = data[i]; }
+                    else {  newData[i] = data[i]; }
                 }
             }
-            return returnBool;
+            if (foundTarget) { count--; data = newData; }
+            return foundTarget;
         }
         public override string ToString()
         {

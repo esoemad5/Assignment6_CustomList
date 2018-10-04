@@ -10,8 +10,16 @@ namespace CustomList
     {
         static void Main(string[] args)
         {
-            CustomList<int> test = new CustomList<int>();
-            test.Add(5);
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(2);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(2);
+            //Act
+            customList.Remove(2);
+            CustomList<int> result = customList;
+            Console.WriteLine();
             /*
             for(int i = 0; i < 512; i++)
             {
