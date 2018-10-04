@@ -21,23 +21,31 @@ namespace CustomList
         }
         public bool Remove(T input) // Removes the 1st occurrence of the object, true if removed, false if not found
         {
-
+            return false;
         }
-        public string ToString()
+        public override string ToString()
         {
+            string output = "";
 
+            return output;
         }
         public static CustomList<T> operator+ (CustomList<T> customListA, CustomList<T> customListB)
         {
+            CustomList<T> output = new CustomList<T>();
 
+            return output;
         }
         public static CustomList<T> operator- (CustomList<T> customListA, CustomList<T> customListB)
         {
+            CustomList<T> output = new CustomList<T>();
 
+            return output;
         }
         public static CustomList<T> Zip(CustomList<T> customListA, CustomList<T> customListB) 
         {
+            CustomList<T> output = new CustomList<T>();
 
+            return output;
         }
     }
 }
