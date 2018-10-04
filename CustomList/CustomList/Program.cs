@@ -10,6 +10,9 @@ namespace CustomList
     {
         static void Main(string[] args)
         {
+            CustomList<int> test = new CustomList<int>();
+            test.Add(5);
+            /*
             for(int i = 0; i < 512; i++)
             {
                 if((i)%16 == 0)
@@ -22,6 +25,7 @@ namespace CustomList
             Console.WriteLine();
             string a = true.ToString();
             Console.WriteLine("{0}", a);
+            */
         }
     }
 }

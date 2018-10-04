@@ -28,7 +28,7 @@ namespace CustomList
 
         public CustomList()
         {
-            data = new T[0];
+            data = new T[1];
             count = 0;
         }
 
