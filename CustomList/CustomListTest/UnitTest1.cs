@@ -896,6 +896,55 @@ namespace CustomListTest
             customList[9] = 5;
         }
 
+        // Sort
+        [TestMethod]
+        public void Sort_IntegersAllUnique_SortedLlist()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(4);
+            customList.Add(2);
+            customList.Add(9);
+            customList.Add(11);
+            customList.Add(8);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(2);
+            expectedResult.Add(4);
+            expectedResult.Add(8);
+            expectedResult.Add(9);
+            expectedResult.Add(11);
+            //Act
+            customList.Sort();
+            CustomList<int> result = customList;
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Sort_IntegersSomeAreRepeated_SortedLlist()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(4);
+            customList.Add(2);
+            customList.Add(9);
+            customList.Add(4);
+            customList.Add(8);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(2);
+            expectedResult.Add(4);
+            expectedResult.Add(4);
+            expectedResult.Add(8);
+            expectedResult.Add(9);
+            //Act
+            customList.Sort();
+            CustomList<int> result = customList;
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
         // Iterable
 
 
