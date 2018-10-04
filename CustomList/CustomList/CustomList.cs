@@ -12,7 +12,19 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
-        public T this[int i] { get => data[i]; set => data[i] = value; }// indexer
+        public T this[int i]
+        {
+            get
+            {
+                if(i >= count) { throw new ArgumentOutOfRangeException(); }
+                return data[i];
+            }
+            set
+            {
+                if (i >= count) { throw new ArgumentOutOfRangeException(); }
+                data[i] = value;
+            }
+        }
                                                                         //Throw ArgumentOutOfRange
         public CustomList()
         {
