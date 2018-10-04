@@ -90,7 +90,14 @@ namespace CustomList
         public static CustomList<T> operator+ (CustomList<T> customListA, CustomList<T> customListB)
         {
             CustomList<T> output = new CustomList<T>();
-
+            foreach(T item in customListA)
+            {
+                output.Add(item);
+            }
+            foreach (T item in customListB)
+            {
+                output.Add(item);
+            }
             return output;
         }
         public static CustomList<T> operator- (CustomList<T> customListA, CustomList<T> customListB)
