@@ -36,7 +36,28 @@ namespace CustomList
         // data.Length changing is not an externally visible outcome; it need not be tested.
         public void Add(T input)
         {
-
+            try
+            {
+                data[count] = input;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                data = MakeNewArray();
+                data[count] = input;
+            }
+            finally
+            {
+                count++;
+            }
+        }
+        private T[] MakeNewArray()
+        {
+            T[] output = new T[data.Length*2];
+            for(int i = 0; i < data.Length; i++)
+            {
+                output[i] = data[i];
+            }
+            return output;
         }
         public bool Remove(T input) // Removes the 1st occurrence of the object, true if removed, false if not found
         {
