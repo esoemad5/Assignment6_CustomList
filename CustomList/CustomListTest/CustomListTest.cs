@@ -5,7 +5,7 @@ using CustomList;
 namespace CustomListTest
 {
     [TestClass]
-    public class UnitTest1
+    public class CustomListTest
     {
         // Add | 4 tests
         [TestMethod]
@@ -945,6 +945,55 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
+        [TestMethod]
+        public void Sort_StringAllUnique_SortedLlist()
+        {
+            //Arrange
+            CustomList<string> customList = new CustomList<string>();
+            customList.Add("Hello");
+            customList.Add("world");
+            customList.Add("!");
+            customList.Add(" ");
+            customList.Add("kappa");
+
+            CustomList<string> expectedResult = new CustomList<string>();
+            expectedResult.Add(" ");
+            expectedResult.Add("!");
+            expectedResult.Add("Hello");
+            expectedResult.Add("kappa");
+            expectedResult.Add("world");
+            //Act
+            customList.Sort();
+            CustomList<string> result = customList;
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Sort_StringsSomeAreRepeated_SortedLlist()
+        {
+            //Arrange
+            CustomList<string> customList = new CustomList<string>();
+            customList.Add("Hello");
+            customList.Add("world");
+            customList.Add("!");
+            customList.Add(" ");
+            customList.Add("kappa");
+            customList.Add("kappa");
+
+            CustomList<string> expectedResult = new CustomList<string>();
+            expectedResult.Add(" ");
+            expectedResult.Add("!");
+            expectedResult.Add("Hello");
+            expectedResult.Add("kappa");
+            expectedResult.Add("kappa");
+            expectedResult.Add("world");
+            //Act
+            customList.Sort();
+            CustomList<string> result = customList;
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
         // Iterable
 
 

@@ -10,12 +10,18 @@ namespace CustomList
     {
         static void Main(string[] args)
         {
-            int a = 500;
-            string b = a.ToString();
-            b = "aello";
-            double c = Char.GetNumericValue(b[0]);
-            int d = '!';
-            Console.WriteLine(d);
+            for(int i = 0; i < 512; i++)
+            {
+                if((i)%16 == 0)
+                {
+                    Console.WriteLine();
+                    Console.Write("{0}: ", i);
+                }
+                Console.Write("{0} ", (char)i);
+            }
+            Console.WriteLine();
+            string a = true.ToString();
+            Console.WriteLine("{0}", a);
         }
     }
 }
