@@ -61,7 +61,29 @@ namespace CustomList
         }
         public bool Remove(T input) // Removes the 1st occurrence of the object, true if removed, false if not found
         {
-            return false;
+            T[] newData = new T[data.Length];
+            bool returnBool = false;
+
+            for(int i = 0; i < count; i++)
+            {
+                if(data[i].Equals(input) && !returnBool)
+                {
+                    count--;
+                    returnBool = true;
+                }
+                else
+                {
+                    if (returnBool)
+                    {
+                        newData[i - 1] = data[i];
+                    }
+                    else
+                    {
+                        newData[i] = data[i];
+                    }
+                }
+            }
+            return returnBool;
         }
         public override string ToString()
         {
