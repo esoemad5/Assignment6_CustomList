@@ -617,6 +617,25 @@ namespace CustomListTest
             customList1.Add(1);
             customList1.Add(3);
             customList1.Add(5);
+            customList2.Add(1);
+            customList2.Remove(1);
+
+            CustomList<int> expectedResult = customList1;
+            //Act
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Zip_OneListIsOnlyInstantiated_OriginalList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+            customList1.Add(1);
+            customList1.Add(3);
+            customList1.Add(5);
 
             CustomList<int> expectedResult = customList1;
             //Act
@@ -627,6 +646,26 @@ namespace CustomListTest
 
         [TestMethod]
         public void Zip_OtherListIsEmpty_OriginalList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            CustomList<int> customList2 = new CustomList<int>();
+            customList2.Add(1);
+            customList2.Add(3);
+            customList2.Add(5);
+            customList1.Add(1);
+            customList1.Remove(1);
+
+
+            CustomList<int> expectedResult = customList2;
+            //Act
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Zip_OtherListIsOnlyInstantiated_OriginalList()
         {
             //Arrange
             CustomList<int> customList1 = new CustomList<int>();
@@ -671,8 +710,8 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod][ExpectedException(typeof(IndexOutOfRangeException))]
-        public void IndexerGet_0ElementList_IndexOutOfRangeException()
+        [TestMethod][ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexerGet_0ElementList_ArgumentOutOfRangeException()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
@@ -696,8 +735,8 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod][ExpectedException(typeof(IndexOutOfRangeException))]
-        public void IndexerSet_0ElementList_IndexOutOfRangeException()
+        [TestMethod][ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexerSet_0ElementList_ArgumentOutOfRangeException()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
