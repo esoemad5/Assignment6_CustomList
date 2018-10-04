@@ -7,7 +7,7 @@ namespace CustomListTest
     [TestClass]
     public class UnitTest1
     {
-        // Add
+        // Add | 4 tests
         [TestMethod]
         public void Add_ValueToEmptyList_ValueInList()
         {
@@ -78,7 +78,7 @@ namespace CustomListTest
         }
 
 
-        // Count
+        // Count | 8 tests
         [TestMethod]
         public void Count_NewObject_0()
         {
@@ -108,7 +108,7 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void Count_Length1List_1()
+        public void Count_ItemAddedToNewList_1()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
@@ -116,6 +116,40 @@ namespace CustomListTest
             customList.Add(value);
 
             int expectedResult = 1;
+            //Act
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void Count_ItemAddedToEmptyList_1()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            int value = 16;
+            customList.Add(value);
+            customList.Remove(value);
+            customList.Add(value);
+
+            int expectedResult = 1;
+            //Act
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void Count_ItemAddedToList_3()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            int value = 16;
+            customList.Add(value);
+            customList.Add(value);
+            customList.Add(value);
+
+            int expectedResult = 3;
             //Act
             int result = customList.Count;
             //Assert
@@ -139,10 +173,25 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-
-        // Remove
         [TestMethod]
-        public void Remove_ListOnlyContainsObject_EmptyList()
+        public void Count_RemoveAnItem_2()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(2);
+            customList.Add(3);
+
+            int expectedResult = 2;
+            //Act
+            customList.Remove(1);
+            int result = customList.Count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void Count_RemoveTheLastItem_0()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
@@ -154,6 +203,22 @@ namespace CustomListTest
             int result = customList.Count;
             //Assert
             Assert.AreEqual(expectedResult, result);
+        }
+
+        // Remove | 11 tests
+        [TestMethod]
+        public void Remove_ListOnlyContainsObject_EmptyList()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            //Act
+            customList.Remove(1);
+            CustomList<int> result = customList;
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -310,7 +375,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        // ToString
+        // ToString | 3 tests
         [TestMethod]
         public void ToString_3Elements_StringComprisedOfTheElements()
         {
@@ -355,7 +420,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        // +
+        // + | 4 Tests
         [TestMethod]
         public void AdditionOperatorOverload_TwoNonEmptyLists_ConcatenatedList()
         {
@@ -436,7 +501,7 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        // -
+        // - | 7 Tests
         [TestMethod]
         public void SubtractionOperatorOverload_MinuendContainsPartOrAllOfTheSubtrahend_ShortenedList()
         {
@@ -575,7 +640,7 @@ namespace CustomListTest
         }
 
 
-        // Zip
+        // Zip | 8 Tests
         [TestMethod]
         public void Zip_ListsOfEqualLengths_ZippedList()
         {
@@ -736,7 +801,7 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        // Indexer
+        // Indexer | 4 Tests
         [TestMethod]
         public void IndexerGet_1ElementList_ValueAtIndex()
         {
@@ -816,8 +881,10 @@ namespace CustomListTest
             }
             return true;
         }
+
         /* used this method when Data was a property
          * Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+         */
         private bool ArraysAreEqual<T>(T[] arr1, T[] arr2)
         {
             if(arr1.Length != arr2.Length)
@@ -833,11 +900,6 @@ namespace CustomListTest
             }
             return true;
         }
-        */
-
-        /*
-         * Review remove tests
-         * */
-
+        
     }
 }
