@@ -100,7 +100,7 @@ namespace CustomList
             }
             return output;
         }
-        public static CustomList<T> operator- (CustomList<T> customListA, CustomList<T> customListB)
+        public static CustomList<T> operator- (CustomList<T> customListA, CustomList<T> customListB) // hold off on this until after Sort. May want to overload <, >, and =
         {
             CustomList<T> output = new CustomList<T>();
 
@@ -109,8 +109,18 @@ namespace CustomList
         public static CustomList<T> Zip(CustomList<T> customListA, CustomList<T> customListB) 
         {
             CustomList<T> output = new CustomList<T>();
+            int stop = customListA.Count;
+            if(customListA.Count < customListB.Count) { stop = customListB.Count; }
 
-            return output;
+            for (int i = 0; i < stop; i++)
+            {
+                try { output.Add(customListA[i]); }
+                catch (ArgumentOutOfRangeException) { }
+                try { output.Add(customListB[i]); }
+                catch (ArgumentOutOfRangeException) { }
+            }
+
+           return output;
         }
         public CustomList<T> Sort()
         {
