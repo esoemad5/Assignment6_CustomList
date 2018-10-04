@@ -47,5 +47,9 @@ namespace CustomList
 
             return output;
         }
+        public void Sort()
+        {
+
+        }
     }
 }

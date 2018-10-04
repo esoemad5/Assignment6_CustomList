@@ -10,10 +10,12 @@ namespace CustomList
     {
         static void Main(string[] args)
         {
-            int[] arr = new int[] { 1, 2, 3 };
-            List<int> list = new List<int>();
-            list.Add(1); list.Add(2); list.Add(3);
-            Console.WriteLine(list[9]);
+            int a = 500;
+            string b = a.ToString();
+            b = "aello";
+            double c = Char.GetNumericValue(b[0]);
+            int d = '!';
+            Console.WriteLine(d);
         }
     }
 }
