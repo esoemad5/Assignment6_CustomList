@@ -876,7 +876,7 @@ namespace CustomListTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void IndexerSet_NegativeIndes_ArgumentOutOfRangeException()
+        public void IndexerSet_NegativeIndex_ArgumentOutOfRangeException()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();

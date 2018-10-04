@@ -16,16 +16,16 @@ namespace CustomList
         {
             get
             {
-                if(i >= count) { throw new ArgumentOutOfRangeException(); }
+                if(i >= count || i < 0) { throw new ArgumentOutOfRangeException(); }
                 return data[i];
             }
             set
             {
-                if (i >= count) { throw new ArgumentOutOfRangeException(); }
+                if (i >= count || i < 0) { throw new ArgumentOutOfRangeException(); }
                 data[i] = value;
             }
         }
-                                                                        //Throw ArgumentOutOfRange
+
         public CustomList()
         {
             data = new T[0];
