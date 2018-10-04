@@ -224,6 +224,37 @@ namespace CustomListTest
         }
 
         [TestMethod]
+        public void Remove_ListDoesNotContainTheTarget_OriginalList()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            customList1.Add(1);
+            customList1.Add(2);
+            customList1.Add(3);
+
+            CustomList<int> expectedResult = customList1;
+            //Act
+            customList1.Remove(7);
+            CustomList<int> result = customList1;
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void Remove_ListDoesNotContainTheTarget_False()
+        {
+            //Arrange
+            CustomList<int> customList1 = new CustomList<int>();
+            customList1.Add(1);
+            customList1.Add(2);
+            customList1.Add(3);
+            //Act
+            bool result = customList1.Remove(7);
+            //Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
         public void Remove_RemoveFromNewList_False()
         {
             //Arrange
@@ -323,8 +354,6 @@ namespace CustomListTest
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
-
-
 
         // +
         [TestMethod]
