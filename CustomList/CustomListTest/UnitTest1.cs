@@ -331,18 +331,18 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void Remove_RemoveFromNewList_0()
+        public void Remove_RemoveFromNewList_EmptyList()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
 
-            int expectedResult = 0;
+            CustomList<int> expectedResult = new CustomList<int>();
             //Act
             customList.Remove(6);
 
-            int result = customList.Count;
+            CustomList<int> result = customList;
             //Assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -359,20 +359,20 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void Remove_RemoveFromEmptyList_0()
+        public void Remove_RemoveFromEmptyList_EmptyList()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
             customList.Add(99);
             customList.Remove(99);
 
-            int expectedResult = 0;
+            CustomList<int> expectedResult = new CustomList<int>();
             //Act
             customList.Remove(99);
 
-            int result = customList.Count;
+            CustomList<int> result = customList;
             //Assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         // ToString | 3 tests
