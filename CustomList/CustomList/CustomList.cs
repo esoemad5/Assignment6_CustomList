@@ -13,7 +13,7 @@ namespace CustomList
         public int Count { get => count; }
 
         public T this[int i] { get => data[i]; set => data[i] = value; }// indexer
-        //ArgumentOutOfRange
+        //Throw ArgumentOutOfRange
 
         public void Add(T input)
         {
@@ -47,9 +47,11 @@ namespace CustomList
 
             return output;
         }
-        public void Sort()
+        public CustomList<T> Sort()
         {
+            CustomList<T> output = new CustomList<T>();
 
+            return output;
         }
     }
 }

@@ -915,8 +915,7 @@ namespace CustomListTest
             expectedResult.Add(9);
             expectedResult.Add(11);
             //Act
-            customList.Sort();
-            CustomList<int> result = customList;
+            CustomList<int> result = customList.Sort();
             //Assert
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
@@ -939,8 +938,7 @@ namespace CustomListTest
             expectedResult.Add(8);
             expectedResult.Add(9);
             //Act
-            customList.Sort();
-            CustomList<int> result = customList;
+            CustomList<int> result = customList.Sort();
             //Assert
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
@@ -962,9 +960,8 @@ namespace CustomListTest
             expectedResult.Add("Hello");
             expectedResult.Add("kappa");
             expectedResult.Add("world");
-            //Act
-            customList.Sort();
-            CustomList<string> result = customList;
+            //Acts
+            CustomList<string> result = customList.Sort();
             //Assert
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
@@ -989,11 +986,11 @@ namespace CustomListTest
             expectedResult.Add("kappa");
             expectedResult.Add("world");
             //Act
-            customList.Sort();
-            CustomList<string> result = customList;
+            CustomList<string> result = customList.Sort();
             //Assert
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
+
         // Iterable
 
 
