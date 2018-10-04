@@ -801,7 +801,7 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        // Indexer | 4 Tests
+        // Indexer | 8 Tests
         [TestMethod]
         public void IndexerGet_1ElementList_ValueAtIndex()
         {
@@ -823,6 +823,29 @@ namespace CustomListTest
             CustomList<int> customList = new CustomList<int>();
             //Act
             int test = customList[0];
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexerGet_NegativeIndex_ArgumentOutOfRangeException()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            //Act
+            int test = customList[-1];
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexerGet_RegularList_ArgumentOutOfRangeException()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(1);
+            customList.Add(1);
+            //Act
+            int test = customList[9];
         }
 
         [TestMethod]
@@ -848,6 +871,29 @@ namespace CustomListTest
             CustomList<int> customList = new CustomList<int>();
             //Act
             customList[0] = 5;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexerSet_NegativeIndes_ArgumentOutOfRangeException()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            //Act
+            customList[-1] = 5;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IndexerSet_RegularList_ArgumentOutOfRangeException()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(1);
+            customList.Add(1);
+            customList.Add(1);
+            //Act
+            customList[9] = 5;
         }
 
         // Iterable
