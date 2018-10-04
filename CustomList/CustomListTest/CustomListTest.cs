@@ -991,6 +991,12 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
+        /* Do I need tests for custom objects?
+         * The plan is to ToString everything, look at the 1st character, ToUpper, typecast to (int), and finally, sort.
+         * It is the other developer's problem to make sure ToString works well for their object.
+         * Do I need to test to make sure CustomList.Sort uses ToString???
+         */
+
         // Iterable
 
 
