@@ -14,6 +14,11 @@ namespace CustomList
 
         public T this[int i] { get => data[i]; set => data[i] = value; }// indexer
                                                                         //Throw ArgumentOutOfRange
+        public CustomList()
+        {
+            data = new T[0];
+            count = 0;
+        }
 
         // Going to do the thing where adding stuff doubles data.Length sometimes, but count remains accurate. How to test for data.Length???
         // data.Length changing is not an externally visible outcome; it need not be tested.

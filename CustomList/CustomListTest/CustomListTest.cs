@@ -84,6 +84,7 @@ namespace CustomListTest
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
+            int[] a;
 
             int expectedResult = 0;
             //Act
