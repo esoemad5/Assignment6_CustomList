@@ -483,7 +483,7 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void SubtractionOperatorOverload_MinuendIsEmptySubtrahendIsNot_EmptyList()
+        public void SubtractionOperatorOverload_MinuendIsOnlyInstantiatedSubtrahendHasElements_EmptyList()
         {
             //Arrange
             CustomList<int> list1 = new CustomList<int>();
@@ -500,6 +500,45 @@ namespace CustomListTest
         }
 
         [TestMethod]
+        public void SubtractionOperatorOverload_MinuendIsEmptySubtrahendIsNot_EmptyList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list2.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+            list1.Add(1);
+            list1.Remove(1);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            //Act
+            CustomList<int> result = (list1 - list2);
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_SubtrahendIsOnlyInstantiatedMinuendHasElements_OriginalList()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(3);
+            list1.Add(4);
+            list1.Add(5);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(3);
+            expectedResult.Add(4);
+            expectedResult.Add(5);
+            //Act
+            CustomList<int> result = (list1 - list2);
+            //Assert
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
         public void SubtractionOperatorOverload_SubtrahendIsEmptyMinuendIsNot_OriginalList()
         {
             //Arrange
@@ -508,6 +547,8 @@ namespace CustomListTest
             list1.Add(3);
             list1.Add(4);
             list1.Add(5);
+            list2.Add(1);
+            list2.Remove(1);
 
             CustomList<int> expectedResult = new CustomList<int>();
             expectedResult.Add(3);
