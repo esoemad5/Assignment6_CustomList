@@ -80,7 +80,10 @@ namespace CustomList
         public override string ToString()
         {
             string output = "";
-
+            for(int i = 0; i < count; i++)
+            {
+                output += data[i].ToString();
+            }
             return output;
         }
         public static CustomList<T> operator+ (CustomList<T> customListA, CustomList<T> customListB)
