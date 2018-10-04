@@ -67,7 +67,7 @@ namespace CustomListTest
 
             int expectedResult = 49;
             //Act
-            for(int i = 0; i < 100; i++)
+            for (int i = 0; i < 100; i++)
             {
                 customList.Add(i);
             }
@@ -162,7 +162,7 @@ namespace CustomListTest
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
-            for(int i = 0; i < 100; i++)
+            for (int i = 0; i < 100; i++)
             {
                 customList.Add(i);
             }
@@ -817,7 +817,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod][ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod] [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void IndexerGet_0ElementList_ArgumentOutOfRangeException()
         {
             //Arrange
@@ -865,7 +865,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod][ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod] [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void IndexerSet_0ElementList_ArgumentOutOfRangeException()
         {
             //Arrange
@@ -999,7 +999,46 @@ namespace CustomListTest
          */
 
         // Iterable
+        [TestMethod]
+        public void GetEnumerator_NonEmptyList_OriginalList()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(5);
+            customList.Add(5);
+            customList.Add(5);
+            customList.Add(5);
 
+            int expectedResult = 20;
+            //Act
+            int result = 0;
+            foreach(int item in customList)
+            {
+                result += item;
+            }
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        
+        [TestMethod]
+        public void GetEnumerator_EmptyList_EmptyList()
+        {
+            //Arrange
+            CustomList<int> customList = new CustomList<int>();
+
+            int expectedResult = 0;
+            //Act
+            int result = 0;
+            foreach (int item in customList)
+            {
+                result += item;
+            }
+
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+        
 
         /* Template for all tests
         [TestMethod]

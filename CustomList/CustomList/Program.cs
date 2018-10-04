@@ -13,13 +13,19 @@ namespace CustomList
             CustomList<int> customList = new CustomList<int>();
             customList.Add(1);
             customList.Add(2);
+            customList.Add(1);
+            customList.Add(2);
+            customList.Add(1);
+            customList.Add(2);
+            customList.Add(1);
+            customList.Add(2);
 
-            CustomList<int> expectedResult = new CustomList<int>();
-            expectedResult.Add(2);
-            //Act
-            customList.Remove(2);
-            CustomList<int> result = customList;
-            Console.WriteLine();
+            foreach (int number in customList)
+            {
+                Console.WriteLine(number);
+            }
+
+
             /*
             for(int i = 0; i < 512; i++)
             {
