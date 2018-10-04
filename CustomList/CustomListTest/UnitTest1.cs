@@ -176,12 +176,13 @@ namespace CustomListTest
             customList.Add(1);
             customList.Add(2);
 
-            int[] expectedResult = new int[] { 2 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(2);
             //Act
             customList.Remove(1);
-            int[] result = customList.Data;
+            CustomList<int> result = customList;
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -193,12 +194,14 @@ namespace CustomListTest
             customList.Add(2);
             customList.Add(3);
 
-            int[] expectedResult = new int[] { 1, 2 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
             //Act
             customList.Remove(3);
-            int[] result = customList.Data;
+            CustomList<int> result = customList;
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -210,12 +213,14 @@ namespace CustomListTest
             customList.Add(2);
             customList.Add(1);
 
-            int[] expectedResult = new int[] { 2, 1 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(2);
+            expectedResult.Add(1);
             //Act
             customList.Remove(1);
-            int[] result = customList.Data;
+            CustomList<int> result = customList;
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -335,11 +340,17 @@ namespace CustomListTest
             list2.Add(5);
             list2.Add(6);
 
-            int[] expectedResult = new int[] { 1, 2, 3, 4, 5, 6, };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
+            expectedResult.Add(4);
+            expectedResult.Add(5);
+            expectedResult.Add(6);
             //Act
-            int[] result = (list1 + list2).Data;
+            CustomList<int> result = (list1 + list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -352,11 +363,14 @@ namespace CustomListTest
             list1.Add(2);
             list1.Add(3);
 
-            int[] expectedResult = new int[] { 1, 2, 3 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
             //Act
-            int[] result = (list1 + list2).Data;
+            CustomList<int> result = (list1 + list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -369,11 +383,14 @@ namespace CustomListTest
             list2.Add(2);
             list2.Add(3);
 
-            int[] expectedResult = new int[] { 1, 2, 3 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
             //Act
-            int[] result = (list1 + list2).Data;
+            CustomList<int> result = (list1 + list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -383,11 +400,11 @@ namespace CustomListTest
             CustomList<int> list1 = new CustomList<int>();
             CustomList<int> list2 = new CustomList<int>();
 
-            int[] expectedResult = new int[] {};
+            CustomList<int> expectedResult = new CustomList<int>();
             //Act
-            int[] result = (list1 + list2).Data;
+            CustomList<int> result = (list1 + list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         // -
@@ -404,11 +421,13 @@ namespace CustomListTest
             list2.Add(4);
             list2.Add(5);
 
-            int[] expectedResult = new int[] { 1, 2 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
             //Act
-            int[] result = (list1 - list2).Data;
+            CustomList<int> result = (list1 - list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -424,11 +443,14 @@ namespace CustomListTest
             list2.Add(5);
             list2.Add(6);
 
-            int[] expectedResult = new int[] { 1, 2, 3 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
             //Act
-            int[] result = (list1 - list2).Data;
+            CustomList<int> result = (list1 - list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -441,11 +463,11 @@ namespace CustomListTest
             list2.Add(4);
             list2.Add(5);
 
-            int[] expectedResult = new int[] { };
+            CustomList<int> expectedResult = new CustomList<int>();
             //Act
-            int[] result = (list1 - list2).Data;
+            CustomList<int> result = (list1 - list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -458,11 +480,14 @@ namespace CustomListTest
             list1.Add(4);
             list1.Add(5);
 
-            int[] expectedResult = new int[] { 3, 4, 5 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(3);
+            expectedResult.Add(4);
+            expectedResult.Add(5);
             //Act
-            int[] result = (list1 - list2).Data;
+            CustomList<int> result = (list1 - list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -472,11 +497,11 @@ namespace CustomListTest
             CustomList<int> list1 = new CustomList<int>();
             CustomList<int> list2 = new CustomList<int>();
 
-            int[] expectedResult = new int[] { };
+            CustomList<int> expectedResult = new CustomList<int>();
             //Act
-            int[] result = (list1 - list2).Data;
+            CustomList<int> result = (list1 - list2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
 
@@ -495,11 +520,17 @@ namespace CustomListTest
             customList2.Add(4);
             customList2.Add(6);
 
-            int[] expectedResult = new int[] { 1, 2, 3, 4, 5, 6 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
+            expectedResult.Add(4);
+            expectedResult.Add(5);
+            expectedResult.Add(6);
             //Act
-            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual<int>(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -514,11 +545,15 @@ namespace CustomListTest
 
             customList2.Add(2);
 
-            int[] expectedResult = new int[] { 1, 2, 3, 5 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
+            expectedResult.Add(5);
             //Act
-            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -533,11 +568,15 @@ namespace CustomListTest
             customList2.Add(4);
             customList2.Add(6);
 
-            int[] expectedResult = new int[] { 1, 2, 4, 6 };
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(4);
+            expectedResult.Add(6);
             //Act
-            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -550,11 +589,11 @@ namespace CustomListTest
             customList1.Add(3);
             customList1.Add(5);
 
-            int[] expectedResult = new int[] { 1, 3, 5 };
+            CustomList<int> expectedResult = customList1;
             //Act
-            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -567,11 +606,11 @@ namespace CustomListTest
             customList2.Add(3);
             customList2.Add(5);
 
-            int[] expectedResult = new int[] { 1, 3, 5 };
+            CustomList<int> expectedResult = customList2;
             //Act
-            int[] result = CustomList<int>.Zip(customList1, customList2).Data;
+            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
             //Assert
-            Assert.IsTrue(ArraysAreEqual(expectedResult, result));
+            Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
         [TestMethod]
@@ -640,7 +679,7 @@ namespace CustomListTest
         // Iterable
 
 
-        /* Template
+        /* Template for all tests
         [TestMethod]
         public void __()
         {

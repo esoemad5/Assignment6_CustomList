@@ -13,6 +13,7 @@ namespace CustomList
         public int Count { get => count; }
 
         public T this[int i] { get => data[i]; set => data[i] = value; }// indexer
+        //ArgumentOutOfRange
 
         public void Add(T input)
         {
