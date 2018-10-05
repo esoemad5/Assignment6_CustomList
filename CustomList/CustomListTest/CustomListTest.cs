@@ -386,7 +386,7 @@ namespace CustomListTest
             customList.Add(2);
             customList.Add(3);
 
-            string expectedResult = "123";
+            string expectedResult = "1, 2, 3";
             //Act
             string result = customList.ToString();
             //Assert
