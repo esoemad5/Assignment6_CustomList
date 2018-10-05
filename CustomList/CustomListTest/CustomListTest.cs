@@ -77,6 +77,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
+
         // Count | 8 tests
         [TestMethod]
         public void Count_NewObject_0()
@@ -420,7 +421,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        // + | 8 Tests
+        // + | 4 Tests
         [TestMethod]
         public void AdditionOperatorOverload_TwoNonEmptyLists_ConcatenatedList()
         {
@@ -488,7 +489,7 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void AdditionOperatorOverload_BothListsAreEmpty_CountIsCorrect()
+        public void AdditionOperatorOverload_BothListsAreEmpty_EmptyList()
         {
             //Arrange
             CustomList<int> list1 = new CustomList<int>();
@@ -501,80 +502,7 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        [TestMethod]
-        public void AdditionOperatorOverload_TwoNonEmptyLists_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list1.Add(1);
-            list1.Add(2);
-            list1.Add(3);
-            list2.Add(4);
-            list2.Add(5);
-            list2.Add(6);
-
-            int expectedResult = 6;
-            //Act
-            CustomList<int> sum = list1 + list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void AdditionOperatorOverload_OneListIsEmpty_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list1.Add(1);
-            list1.Add(2);
-            list1.Add(3);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> sum = list1 + list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void AdditionOperatorOverload_OtherListIsEmpty_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list2.Add(1);
-            list2.Add(2);
-            list2.Add(3);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> sum = list1 + list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void AdditionOperatorOverload_BothListsAreEmpty_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-
-            int expectedResult = 0;
-            //Act
-            CustomList<int> sum = list1 + list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-
-        // - | 14 Tests
+        // - | 7 Tests
         [TestMethod]
         public void SubtractionOperatorOverload_MinuendContainsPartOrAllOfTheSubtrahend_ShortenedList()
         {
@@ -710,139 +638,6 @@ namespace CustomListTest
             CustomList<int> result = (list1 - list2);
             //Assert
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
-        }
-
-        [TestMethod]
-        public void SubtractionOperatorOverload_MinuendContainsPartOrAllOfTheSubtrahend_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list1.Add(1);
-            list1.Add(2);
-            list1.Add(3);
-            list2.Add(3);
-            list2.Add(4);
-            list2.Add(5);
-
-            int expectedResult = 2;
-            //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void SubtractionOperatorOverload_MinuendContainsNoneOfTheSubtrahend_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list1.Add(1);
-            list1.Add(2);
-            list1.Add(3);
-            list2.Add(4);
-            list2.Add(5);
-            list2.Add(6);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void SubtractionOperatorOverload_MinuendIsOnlyInstantiatedSubtrahendHasElements_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list2.Add(3);
-            list2.Add(4);
-            list2.Add(5);
-
-            int expectedResult = 0;
-            //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void SubtractionOperatorOverload_MinuendIsEmptySubtrahendIsNot_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list2.Add(3);
-            list2.Add(4);
-            list2.Add(5);
-            list1.Add(1);
-            list1.Remove(1);
-
-            int expectedResult = 0;
-            //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void SubtractionOperatorOverload_SubtrahendIsOnlyInstantiatedMinuendHasElements_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list1.Add(3);
-            list1.Add(4);
-            list1.Add(5);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void SubtractionOperatorOverload_SubtrahendIsEmptyMinuendIsNot_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-            list1.Add(3);
-            list1.Add(4);
-            list1.Add(5);
-            list2.Add(1);
-            list2.Remove(1);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void SubtractionOperatorOverload_BothMinuendAndSubtrahendAreEmpty_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> list1 = new CustomList<int>();
-            CustomList<int> list2 = new CustomList<int>();
-
-            int expectedResult = 0;
-            //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
         }
 
 
@@ -1007,160 +802,6 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        [TestMethod]
-        public void Zip_ListsOfEqualLengths_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-            customList1.Add(1);
-            customList1.Add(3);
-            customList1.Add(5);
-
-            customList2.Add(2);
-            customList2.Add(4);
-            customList2.Add(6);
-
-            int expectedResult = 6;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void Zip_List1LongerThanList2_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-            customList1.Add(1);
-            customList1.Add(3);
-            customList1.Add(5);
-
-            customList2.Add(2);
-
-            int expectedResult = 4;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void Zip_List1ShorterThanList2_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-            customList1.Add(1);
-
-            customList2.Add(2);
-            customList2.Add(4);
-            customList2.Add(6);
-
-            int expectedResult = 4;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void Zip_OneListIsEmpty_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-            customList1.Add(1);
-            customList1.Add(3);
-            customList1.Add(5);
-            customList2.Add(1);
-            customList2.Remove(1);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void Zip_OneListIsOnlyInstantiated_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-            customList1.Add(1);
-            customList1.Add(3);
-            customList1.Add(5);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void Zip_OtherListIsEmpty_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-            customList2.Add(1);
-            customList2.Add(3);
-            customList2.Add(5);
-            customList1.Add(1);
-            customList1.Remove(1);
-
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void Zip_OtherListIsOnlyInstantiated_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-            customList2.Add(1);
-            customList2.Add(3);
-            customList2.Add(5);
-
-            int expectedResult = 3;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void Zip_BothListsareEmpty_CountIsCorrect()
-        {
-            //Arrange
-            CustomList<int> customList1 = new CustomList<int>();
-            CustomList<int> customList2 = new CustomList<int>();
-
-            int expectedResult = 0;
-            //Act
-            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
-            int result = zip.count;
-            //Assert
-            Assert.AreEqual(expectedResult, result);
-        }
-
         // Indexer | 8 Tests
         [TestMethod]
         public void IndexerGet_1ElementList_ValueAtIndex()
@@ -1176,7 +817,8 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod] [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void IndexerGet_0ElementList_ArgumentOutOfRangeException()
         {
             //Arrange
@@ -1224,7 +866,8 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod] [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void IndexerSet_0ElementList_ArgumentOutOfRangeException()
         {
             //Arrange
@@ -1371,7 +1014,7 @@ namespace CustomListTest
             int expectedResult = 20;
             //Act
             int result = 0;
-            foreach(int item in customList)
+            foreach (int item in customList)
             {
                 result += item;
             }
@@ -1379,7 +1022,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        
+
         [TestMethod]
         public void GetEnumerator_EmptyList_EmptyList()
         {
@@ -1397,7 +1040,7 @@ namespace CustomListTest
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
-        
+
 
         /* Template for all tests
         [TestMethod]
@@ -1411,15 +1054,14 @@ namespace CustomListTest
         }
         */
 
-        // Probably didnt need to add those count tests. This function returns false if the counts arent the same.
         // Assert.IsTrue(ListsAreEqual(expectedResult, result));
         private bool ListsAreEqual<T>(CustomList<T> list1, CustomList<T> list2)
         {
-            if(list1.Count != list2.Count)
+            if (list1.Count != list2.Count)
             {
                 return false;
             }
-            for(int i = 0; i < list1.Count; i++)
+            for (int i = 0; i < list1.Count; i++)
             {
                 if (!list1[i].Equals(list2[i]))
                 {
@@ -1434,19 +1076,19 @@ namespace CustomListTest
          */
         private bool ArraysAreEqual<T>(T[] arr1, T[] arr2)
         {
-            if(arr1.Length != arr2.Length)
+            if (arr1.Length != arr2.Length)
             {
                 return false;
             }
-            for(int i = 0; i < arr1.Length; i++)
+            for (int i = 0; i < arr1.Length; i++)
             {
-                if(!arr1[i].Equals(arr2[i]))
+                if (!arr1[i].Equals(arr2[i]))
                 {
                     return false;
                 }
             }
             return true;
         }
-        
+
     }
 }
