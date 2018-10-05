@@ -17,12 +17,18 @@ namespace CustomList
         {
             get
             {
-                if(i >= count || i < 0) { throw new ArgumentOutOfRangeException(); }
+                if(i >= count || i < 0)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
                 return data[i];
             }
             set
             {
-                if (i >= count || i < 0) { throw new ArgumentOutOfRangeException(); }
+                if (i >= count || i < 0)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
                 data[i] = value;
             }
         }
@@ -62,17 +68,25 @@ namespace CustomList
         }
         public bool Remove(T input) // Removes the 1st occurrence of the object, true if removed, false if not found
         {
-            // Are these if statements ok???
             T[] newData = new T[data.Length];
             bool foundTarget = false;
 
             for(int i = 0; i < count; i++)
             {
-                if(data[i].Equals(input) && !foundTarget) { foundTarget = true; }
+                if(data[i].Equals(input) && !foundTarget)
+                {
+                    foundTarget = true;
+                }
                 else
                 {
-                    if (foundTarget) { newData[i - 1] = data[i]; }
-                    else {  newData[i] = data[i]; }
+                    if (foundTarget)
+                    {
+                        newData[i - 1] = data[i];
+                    }
+                    else
+                    {
+                        newData[i] = data[i];
+                    }
                 }
             }
             if (foundTarget) { count--; data = newData; }
@@ -114,10 +128,22 @@ namespace CustomList
 
             for (int i = 0; i < stop; i++)
             {
-                try { output.Add(customListA[i]); }
-                catch (ArgumentOutOfRangeException) { }
-                try { output.Add(customListB[i]); }
-                catch (ArgumentOutOfRangeException) { }
+                try
+                {
+                    output.Add(customListA[i]);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                try
+                {
+                    output.Add(customListB[i]);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
            return output;
@@ -132,52 +158,44 @@ namespace CustomList
             return output;
         }
 
-
-
-
-        private bool IsLessThanOrEqualTo()
+        /* Like CompareTo, returns -1, 0, or 1 if < = >, respectively.
+         * Unlike CompareTo, this compares parts of objects rather than the entire object (CustomList in this case)
+         */
+        private decimal[] ConvertToNumber(int element0, int element1) 
         {
-            return false;
-        }
+            T[] output = new T[2];
 
-        /*
-        public static void test(CustomList<T> a, CustomList<T> b)
-        {
-            if (a[0] > b[0])
+            if(this[element1] is sbyte || this[element1] is short || this[element1] is int || this[element1] is long || this[element1] is byte || this[element1] is ushort || this[element1] is uint || this[element1] is ulong || this[element1] is float || this[element1] is double)
             {
-                Console.WriteLine("Hello World!");
+                //output[0] = (decimal) this[element0];
+               // output[1] = (decimal) this[element1];
             }
-        }
-        public static bool operator > (T customListA, T customListB)
-        {
-            if(5< 6)
+
+            else
             {
-                Console.WriteLine("Hello World!");
+                string stringOutput0 = this[element0].ToString();
+                string stringOutput1 = this[element1].ToString();
+
+                char charOutput0;
+                char charOutput1;
+
+                if(stringOutput0.Length == 0)
+                {
+                    charOutput0 = ' ';
+                }
+                if (stringOutput1.Length == 0)
+                {
+                    charOutput1 = ' ';
+                }
+
+
+
+
             }
-            return true;
-        }
-        public static bool operator < (T customListA, T customListB)
-        {
-            return true;
+            return new decimal[1];
+            //return output;
         }
 
-        public static bool operator <= (T customListA, T customListB)
-        {
-            return true;
-        }
-        public static bool operator >=(T customListA, T customListB)
-        {
-            return true;
-        }
-        public static bool operator ==(T customListA, T customListB)
-        {
-            return true;
-        }
-        public static bool operator !=(T customListA, T customListB)
-        {
-            return true;
-        }
-        */
 
         public IEnumerator GetEnumerator()
         {
