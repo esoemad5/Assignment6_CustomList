@@ -158,8 +158,8 @@ namespace CustomList
             if(data is int[])
             {
                 decimal[] decimalRepresentation = ConvertToNumber();
-                int[] indices = MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimalRepresentation);
-                ReOrderList(indices);
+                int[] indices = MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimalRepresentation); // TODO
+                ReOrderList(indices); // TODO
             }
             return output;
         }
@@ -204,13 +204,26 @@ namespace CustomList
         private int[] MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimal[] array) // TODO
         {
             int[] indices = new int[array.Length];
-            CustomList<CustomList<decimal>> List2D = ChangeArrayTo2DCustomList(array);
+            CustomList<CustomList<decimal>> list2D = ChangeArrayTo2DCustomList(array);
 
-            while (List2D.Count != 1)
+            while (list2D.Count != 1)
             {
-
+                CustomList<CustomList<decimal>> nextList = new CustomList<CustomList<decimal>>();
+                for (int i = 0; i < list2D.Count; i++)
+                {
+                    try
+                    {
+                        // merge lists 2 by 2
+                        // store lists in nextList
+                        // note the indices in indices when swapping
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        // if there are an odd number of lists, just add the last one to the end of nextList
+                    }
+                }
+                list2D = nextList;
             }
-
             return indices;
         }
 

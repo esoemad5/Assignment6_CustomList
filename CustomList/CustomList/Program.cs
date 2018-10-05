@@ -13,8 +13,6 @@ namespace CustomList
 
         static void Main(string[] args)
         {
-
-
             
 
 
@@ -87,11 +85,13 @@ namespace CustomList
             listOfStrings.Add(" ");
             listOfStrings.Add("");
             listOfStrings.Add("333ncv023u");
+            /*
             decimalRepresentationOfList = listOfStrings.ConvertToNumber(); // need to make the function public to test this
             foreach(decimal thing in decimalRepresentationOfList)
             {
                 Console.WriteLine(thing);
             }
+            */
         }
 
 
