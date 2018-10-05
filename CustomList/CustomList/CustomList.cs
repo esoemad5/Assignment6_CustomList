@@ -157,12 +157,14 @@ namespace CustomList
             CustomList<T> output = new CustomList<T>();
             if(data is int[])
             {
-
+                decimal[] decimalRepresentation = ConvertToNumber();
+                int[] indices = MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimalRepresentation);
+                ReOrderList(indices);
             }
             return output;
         }
 
-        public decimal[] ConvertToNumber() 
+        private decimal[] ConvertToNumber() 
         {
             decimal[] output = new decimal[count];
 
@@ -198,6 +200,36 @@ namespace CustomList
             return output;
         }
 
+
+        private int[] MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimal[] array) // TODO
+        {
+            int[] indices = new int[array.Length];
+            CustomList<CustomList<decimal>> List2D = ChangeArrayTo2DCustomList(array);
+
+            while (List2D.Count != 1)
+            {
+
+            }
+
+            return indices;
+        }
+
+        private CustomList<CustomList<decimal>> ChangeArrayTo2DCustomList(decimal[] array)
+        {
+            CustomList<CustomList<decimal>> list2D = new CustomList<CustomList<decimal>>();
+            foreach(decimal number in array)
+            {
+                CustomList<decimal> element = new CustomList<decimal>();
+                element.Add(number);
+                list2D.Add(element);
+            }
+            return list2D;
+        }
+
+        private void ReOrderList(int[] indices) // TODO
+        {
+
+        }
 
         public IEnumerator GetEnumerator()
         {

@@ -14,22 +14,7 @@ namespace CustomList
         static void Main(string[] args)
         {
 
-            decimal[] decimalRepresentationOfList;
-            CustomList<string> listOfStrings = new CustomList<string>();
-            Console.WriteLine((int)'1');
-            listOfStrings.Add("1234");
-            listOfStrings.Add("hello");
-            listOfStrings.Add("!@#$#$%~");
-            listOfStrings.Add("90182364");
-            listOfStrings.Add(" -0828374098");
-            listOfStrings.Add(" ");
-            listOfStrings.Add("");
-            listOfStrings.Add("333ncv023u");
-            decimalRepresentationOfList = listOfStrings.ConvertToNumber();
-            foreach(decimal thing in decimalRepresentationOfList)
-            {
-                Console.WriteLine(thing);
-            }
+
             
 
 
@@ -89,7 +74,25 @@ namespace CustomList
             string a = "1, 2, 3";
             Console.WriteLine(testList.ToString() == a);
         }
-
+        private void TestConvertToNumber()
+        {
+        decimal[] decimalRepresentationOfList;
+        CustomList<string> listOfStrings = new CustomList<string>();
+        Console.WriteLine((int)'1');
+            listOfStrings.Add("1234");
+            listOfStrings.Add("hello");
+            listOfStrings.Add("!@#$#$%~");
+            listOfStrings.Add("90182364");
+            listOfStrings.Add(" -0828374098");
+            listOfStrings.Add(" ");
+            listOfStrings.Add("");
+            listOfStrings.Add("333ncv023u");
+            decimalRepresentationOfList = listOfStrings.ConvertToNumber(); // need to make the function public to test this
+            foreach(decimal thing in decimalRepresentationOfList)
+            {
+                Console.WriteLine(thing);
+            }
+        }
 
 
 
