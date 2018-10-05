@@ -1021,10 +1021,10 @@ namespace CustomListTest
             customList2.Add(4);
             customList2.Add(6);
 
-            int expectedResult = list1.Count + list2.Count;
+            int expectedResult = 6;
             //Act
-            CustomList<int> sum = list1 - list2;
-            int result = sum.count;
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
@@ -1041,15 +1041,12 @@ namespace CustomListTest
 
             customList2.Add(2);
 
-            CustomList<int> expectedResult = new CustomList<int>();
-            expectedResult.Add(1);
-            expectedResult.Add(2);
-            expectedResult.Add(3);
-            expectedResult.Add(5);
+            int expectedResult = 4;
             //Act
-            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
-            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
@@ -1064,15 +1061,12 @@ namespace CustomListTest
             customList2.Add(4);
             customList2.Add(6);
 
-            CustomList<int> expectedResult = new CustomList<int>();
-            expectedResult.Add(1);
-            expectedResult.Add(2);
-            expectedResult.Add(4);
-            expectedResult.Add(6);
+            int expectedResult = 4;
             //Act
-            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
-            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
@@ -1087,11 +1081,12 @@ namespace CustomListTest
             customList2.Add(1);
             customList2.Remove(1);
 
-            CustomList<int> expectedResult = customList1;
+            int expectedResult = 3;
             //Act
-            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
-            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
@@ -1104,11 +1099,12 @@ namespace CustomListTest
             customList1.Add(3);
             customList1.Add(5);
 
-            CustomList<int> expectedResult = customList1;
+            int expectedResult = 3;
             //Act
-            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
-            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
@@ -1124,11 +1120,12 @@ namespace CustomListTest
             customList1.Remove(1);
 
 
-            CustomList<int> expectedResult = customList2;
+            int expectedResult = 3;
             //Act
-            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
-            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
@@ -1141,11 +1138,12 @@ namespace CustomListTest
             customList2.Add(3);
             customList2.Add(5);
 
-            CustomList<int> expectedResult = customList2;
+            int expectedResult = 3;
             //Act
-            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
-            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
@@ -1155,11 +1153,12 @@ namespace CustomListTest
             CustomList<int> customList1 = new CustomList<int>();
             CustomList<int> customList2 = new CustomList<int>();
 
-            CustomList<int> expectedResult = new CustomList<int>();
+            int expectedResult = 0;
             //Act
-            CustomList<int> result = CustomList<int>.Zip(customList1, customList2);
+            CustomList<int> zip = CustomList<int>.Zip(customList1, customList2);
+            int result = zip.count;
             //Assert
-            Assert.IsTrue(ListsAreEqual(expectedResult, result));
+            Assert.AreEqual(expectedResult, result);
         }
 
         // Indexer | 8 Tests
