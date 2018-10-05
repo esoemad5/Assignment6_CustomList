@@ -158,42 +158,29 @@ namespace CustomList
             return output;
         }
 
-        /* Like CompareTo, returns -1, 0, or 1 if < = >, respectively.
-         * Unlike CompareTo, this compares parts of objects rather than the entire object (CustomList in this case)
-         */
-        private decimal[] ConvertToNumber(int element0, int element1) 
+        private decimal[] ConvertToNumber() 
         {
-            T[] output = new T[2];
-
-            if(this[element1] is sbyte || this[element1] is short || this[element1] is int || this[element1] is long || this[element1] is byte || this[element1] is ushort || this[element1] is uint || this[element1] is ulong || this[element1] is float || this[element1] is double)
+            decimal[] output = new decimal[count];
+            for(int i = 0; i < data.Length; i++)
             {
-                //output[0] = (decimal) this[element0];
-               // output[1] = (decimal) this[element1];
-            }
-
-            else
-            {
-                string stringOutput0 = this[element0].ToString();
-                string stringOutput1 = this[element1].ToString();
-
-                char charOutput0;
-                char charOutput1;
-
-                if(stringOutput0.Length == 0)
+                try
                 {
-                    charOutput0 = ' ';
+                    output[i] = decimal.Parse(data[i].ToString()); // Converts numbers
                 }
-                if (stringOutput1.Length == 0)
+                catch (FormatException)
                 {
-                    charOutput1 = ' ';
+                    try
+                    {
+                        output[i] = (decimal)data[i].ToString()[0];// Converts strings (or Object.ToString();)
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        output[i] = (decimal)' '; // If the string/char is: ""
+                    }
                 }
-
-
-
-
+                
             }
-            return new decimal[1];
-            //return output;
+            return output;
         }
 
 
