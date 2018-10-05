@@ -77,7 +77,6 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-
         // Count | 8 tests
         [TestMethod]
         public void Count_NewObject_0()
@@ -421,7 +420,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        // + | 4 Tests
+        // + | 8 Tests
         [TestMethod]
         public void AdditionOperatorOverload_TwoNonEmptyLists_ConcatenatedList()
         {
@@ -489,18 +488,103 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void AdditionOperatorOverload_BothListsAreEmpty_EmptyList()
+        public void AdditionOperatorOverload_TwoNonEmptyLists_ConcatenatedList()
         {
             //Arrange
             CustomList<int> list1 = new CustomList<int>();
             CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+            list2.Add(6);
 
             CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
+            expectedResult.Add(2);
+            expectedResult.Add(3);
+            expectedResult.Add(4);
+            expectedResult.Add(5);
+            expectedResult.Add(6);
             //Act
             CustomList<int> result = (list1 + list2);
             //Assert
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
+
+        [TestMethod]
+        public void AdditionOperatorOverload_TwoNonEmptyLists_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+            list2.Add(6);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 + list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void AdditionOperatorOverload_OneListIsEmpty_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 + list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void AdditionOperatorOverload_OtherListIsEmpty_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list2.Add(1);
+            list2.Add(2);
+            list2.Add(3);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 + list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void AdditionOperatorOverload_BothListsAreEmpty_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 + list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
 
         // - | 7 Tests
         [TestMethod]

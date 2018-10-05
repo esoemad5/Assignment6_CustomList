@@ -11,22 +11,8 @@ namespace CustomList
         static void Main(string[] args)
         {
             CustomList<int> customList = new CustomList<int>();
-            customList.Add(1);
-            customList.Add(2);
-            customList.Add(1);
-            customList.Add(2);
-            customList.Add(1);
-            customList.Add(2);
-            customList.Add(1);
-            customList.Add(2);
 
-            foreach (int number in customList)
-            {
-                Console.WriteLine(number);
-            }
-
-
-            /*
+            int a = (int)'A';
             for(int i = 0; i < 512; i++)
             {
                 if((i)%16 == 0)
@@ -39,7 +25,6 @@ namespace CustomList
             Console.WriteLine();
             string a = true.ToString();
             Console.WriteLine("{0}", a);
-            */
         }
     }
 }

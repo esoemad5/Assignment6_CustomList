@@ -125,9 +125,56 @@ namespace CustomList
         public CustomList<T> Sort()
         {
             CustomList<T> output = new CustomList<T>();
+            if(data is int[])
+            {
 
+            }
             return output;
         }
+
+        private bool IsLessThanOrEqualTo()
+        {
+            return false;
+        }
+
+        /*
+        public static void test(CustomList<T> a, CustomList<T> b)
+        {
+            if (a[0] > b[0])
+            {
+                Console.WriteLine("Hello World!");
+            }
+        }
+        public static bool operator > (T customListA, T customListB)
+        {
+            if(5< 6)
+            {
+                Console.WriteLine("Hello World!");
+            }
+            return true;
+        }
+        public static bool operator < (T customListA, T customListB)
+        {
+            return true;
+        }
+
+        public static bool operator <= (T customListA, T customListB)
+        {
+            return true;
+        }
+        public static bool operator >=(T customListA, T customListB)
+        {
+            return true;
+        }
+        public static bool operator ==(T customListA, T customListB)
+        {
+            return true;
+        }
+        public static bool operator !=(T customListA, T customListB)
+        {
+            return true;
+        }
+        */
 
         public IEnumerator GetEnumerator()
         {
