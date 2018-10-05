@@ -166,26 +166,24 @@ namespace CustomList
         {
             decimal[] output = new decimal[count];
 
-            if(data[0] is string) // make sure sorting function just returns for length zero lists or this will throw an exception
+            try
             {
-
-            }
-
-            for(int i = 0; i < count; i++)
-            {
-                try // if a number (sbyte, short, int, long, ... double, decimal
+                // make sure sorting function just returns for length zero lists or this will throw an exception
+                if (data[0] is string) // so strings like " 0823" dont get converted here
                 {
-                    if(data[i] is string)
-                    {
-                        throw new FormatException(); // so strings like " 0823" dont get converted here
-                    }
-                    else
-                    {
-                        output[i] = decimal.Parse(data[i].ToString()); // Converts numbers
-                    }
-                    
+                    throw new FormatException();
                 }
-                catch (FormatException) // if not a number
+                else
+                {
+                    for(int i = 0; i < count; i++)
+                    {
+                        output[i] = decimal.Parse(data[i].ToString()); // Converts numbers, throws exception for a non-string/number
+                    }
+                }
+            }
+            catch (FormatException) // convert anything thats not a number
+            {
+                for(int i = 0; i < count; i++)
                 {
                     try
                     {
@@ -196,7 +194,6 @@ namespace CustomList
                         output[i] = (decimal)' '; // If the string/char is: ""
                     }
                 }
-                
             }
             return output;
         }
