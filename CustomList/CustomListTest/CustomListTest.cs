@@ -1411,6 +1411,7 @@ namespace CustomListTest
         }
         */
 
+        // Probably didnt need to add those count tests. This function returns false if the counts arent the same.
         // Assert.IsTrue(ListsAreEqual(expectedResult, result));
         private bool ListsAreEqual<T>(CustomList<T> list1, CustomList<T> list2)
         {
