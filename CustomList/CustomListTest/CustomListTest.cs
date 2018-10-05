@@ -1071,7 +1071,8 @@ namespace CustomListTest
             return true;
         }
 
-        /* used this method when Data was a property
+        /* Used this method when Data was a property
+         * Obsolete now.
          * Assert.IsTrue(ArraysAreEqual(expectedResult, result));
          */
         private bool ArraysAreEqual<T>(T[] arr1, T[] arr2)

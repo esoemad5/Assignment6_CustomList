@@ -200,7 +200,6 @@ namespace CustomList
             return output;
         }
 
-
         private int[] MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimal[] array) // TODO
         {
             int[] indices = new int[array.Length];
@@ -220,6 +219,11 @@ namespace CustomList
                     catch (ArgumentOutOfRangeException)
                     {
                         // if there are an odd number of lists, just add the last one to the end of nextList
+                        nextList[i] = list2D[i];
+                        if(i != list2D.Count)
+                        {
+                            throw new Exception("There are still lists left in list2D that have not been sorted.");
+                        }
                     }
                 }
                 list2D = nextList;
