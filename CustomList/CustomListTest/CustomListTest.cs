@@ -488,25 +488,13 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void AdditionOperatorOverload_TwoNonEmptyLists_ConcatenatedList()
+        public void AdditionOperatorOverload_BothListsAreEmpty_CountIsCorrect()
         {
             //Arrange
             CustomList<int> list1 = new CustomList<int>();
             CustomList<int> list2 = new CustomList<int>();
-            list1.Add(1);
-            list1.Add(2);
-            list1.Add(3);
-            list2.Add(4);
-            list2.Add(5);
-            list2.Add(6);
 
             CustomList<int> expectedResult = new CustomList<int>();
-            expectedResult.Add(1);
-            expectedResult.Add(2);
-            expectedResult.Add(3);
-            expectedResult.Add(4);
-            expectedResult.Add(5);
-            expectedResult.Add(6);
             //Act
             CustomList<int> result = (list1 + list2);
             //Assert
@@ -586,7 +574,7 @@ namespace CustomListTest
         }
 
 
-        // - | 7 Tests
+        // - | 14 Tests
         [TestMethod]
         public void SubtractionOperatorOverload_MinuendContainsPartOrAllOfTheSubtrahend_ShortenedList()
         {
@@ -722,6 +710,139 @@ namespace CustomListTest
             CustomList<int> result = (list1 - list2);
             //Assert
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_MinuendContainsPartOrAllOfTheSubtrahend_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 - list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_MinuendContainsNoneOfTheSubtrahend_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+            list2.Add(6);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 - list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_MinuendIsOnlyInstantiatedSubtrahendHasElements_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list2.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 - list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_MinuendIsEmptySubtrahendIsNot_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list2.Add(3);
+            list2.Add(4);
+            list2.Add(5);
+            list1.Add(1);
+            list1.Remove(1);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 - list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_SubtrahendIsOnlyInstantiatedMinuendHasElements_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(3);
+            list1.Add(4);
+            list1.Add(5);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 - list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_SubtrahendIsEmptyMinuendIsNot_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(3);
+            list1.Add(4);
+            list1.Add(5);
+            list2.Add(1);
+            list2.Remove(1);
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 - list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void SubtractionOperatorOverload_BothMinuendAndSubtrahendAreEmpty_CountIsCorrect()
+        {
+            //Arrange
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+
+            int expectedResult = list1.Count + list2.Count;
+            //Act
+            CustomList<int> sum = list1 - list2;
+            int result = sum.count;
+            //Assert
+            Assert.AreEqual(expectedResult, result);
         }
 
 
