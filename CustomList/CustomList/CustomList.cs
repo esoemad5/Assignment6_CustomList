@@ -159,7 +159,7 @@ namespace CustomList
             {
                 decimal[] decimalRepresentation = ConvertToNumber();
                 int[] indices = MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimalRepresentation); // TODO
-                ReOrderList(indices); // TODO
+                ReOrderList(indices);
             }
             return output;
         }
@@ -214,6 +214,12 @@ namespace CustomList
                     {
                         // merge lists 2 by 2
                         // store lists in nextList
+                        CustomList<decimal> element = new CustomList<decimal>();
+                        for(int j = 0; j < list2D[i].Count; j++) // this might be totally bad
+                        {
+
+                        }
+                        nextList.Add(element);
                         // note the indices in indices when swapping
                     }
                     catch (ArgumentOutOfRangeException)
@@ -243,9 +249,14 @@ namespace CustomList
             return list2D;
         }
 
-        private void ReOrderList(int[] indices) // TODO
+        private void ReOrderList(int[] indices)
         {
-
+            T[] newData = new T[count];
+            for(int i = 0; i < count; i++)
+            {
+                newData[i] = data[indices[i]];
+            }
+            data = newData;
         }
 
         public IEnumerator GetEnumerator()
