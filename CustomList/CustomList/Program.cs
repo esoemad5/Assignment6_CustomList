@@ -13,23 +13,29 @@ namespace CustomList
 
         static void Main(string[] args)
         {
-            CustomList<int> test = new CustomList<int>();
+            CustomList<CustomList<int>> test = new CustomList<CustomList<int>>();
             Random rand = new Random();
-            while(test.Count < 26)
+
+            CustomList<int> b = new CustomList<int>();
+            while (test.Count < 26)
             {
                 if(test.Count != 5)
                 {
-                    test.Add(rand.Next(0, 100));
+                    CustomList<int> a = new CustomList<int>();
+                    a.Add(rand.Next(0, 100));
+                    test.Add(a);
                 }
                 else
                 {
-                    test.Add(200);
+                    
+                    b.Add(200);
+                    test.Add(b);
                 }
                 
             }
             Console.WriteLine(test.Count);
             Console.WriteLine(test.ToString());
-            test.Remove(200);
+            test.Remove(b);
             Console.WriteLine(test.Count);
             Console.WriteLine(test.ToString());
             //Console.WriteLine(test.Sort().ToString());
