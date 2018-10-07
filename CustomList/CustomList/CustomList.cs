@@ -13,6 +13,7 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
+        // This variable is only used for sorting and will not be instantiated until CustomList<T>.Sort is called.
         private CustomList<CustomList<SortHelper>> sortingArrayBob;
 
         public T this[int i]
@@ -98,7 +99,11 @@ namespace CustomList
                     }
                 }
             }
-            if (foundTarget) { count--; data = newData; }
+            if (foundTarget)
+            {
+                count--;
+                data = newData;
+            }
             return foundTarget;
         }
         public override string ToString()
@@ -182,6 +187,7 @@ namespace CustomList
         private class SortHelper
         {
             private decimal decimalRepresentation;
+            public decimal DecimalRepresentation { get => decimalRepresentation; }
             private int originalLocation;
 
             public SortHelper(decimal decimalRepresentation, int originalLocation)
@@ -197,15 +203,44 @@ namespace CustomList
 
             for(int i = 0; i< sortingArrayBob.Count; i = i + 2)
             {
+                nextBob.Add(new CustomList<SortHelper>());
                 try
                 {
-                    foreach(SortHelper item in sortingArrayBob[i])
+                    while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0)
                     {
-
+                        try
+                        {
+                            if(sortingArrayBob[i][0].DecimalRepresentation > sortingArrayBob[1 + 1][0].DecimalRepresentation)
+                            {
+                                nextBob[i].Add(sortingArrayBob[i][0]);
+                            }
+                            else
+                            {
+                                nextBob[i].Add(sortingArrayBob[i+1][0]);
+                            }
+                            
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            Console.WriteLine("Out of range inside while loop of MergeSort. This should be impossible.");
+                        }
                     }
-                    //sortingArrayBob[i][???] sortingArrayBob[i + 1][???];
+                    if(sortingArrayBob[i].Count > 0)
+                    {
+                        foreach(SortHelper extraThing in sortingArrayBob[i])
+                        {
+                            nextBob[i].Add(extraThing);
+                        }
+                    }
+                    else
+                    {
+                        foreach (SortHelper extraThing in sortingArrayBob[i+1])
+                        {
+                            nextBob[i].Add(extraThing);
+                        }
+                    }
                 }
-                catch (IndexOutOfRangeException)
+                catch (ArgumentOutOfRangeException)
                 {
                     nextBob[i] = sortingArrayBob[i];
                     if(i != sortingArrayBob.Count - 1)

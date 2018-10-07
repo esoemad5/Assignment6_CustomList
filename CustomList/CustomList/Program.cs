@@ -13,21 +13,27 @@ namespace CustomList
 
         static void Main(string[] args)
         {
-            while (true)
+            int[] a = new int[2];
+            try
             {
-                int input;
+                while(a[5] != 3)
+                {
+                    //If the line below is commented out, the program takes a long time to start, but still writes "Hello" as normal.
+                    Console.WriteLine("feelsbadman"); Console.ReadLine();
+                }
+                // a[5] = 8;
                 try
                 {
-                    input = int.Parse(Console.ReadLine());
+                    a[5] = 8;
                 }
-                catch (Exception){ continue; }
-                int[] sortingArrayBob = new int[input];
-                while (sortingArrayBob.Length > 1)
+                catch (IndexOutOfRangeException)
                 {
-                    int nextLength = (sortingArrayBob.Length / 2) + (sortingArrayBob.Length % 2);
-                    sortingArrayBob = new int[nextLength];
-                    Console.WriteLine(nextLength);
+                    Console.WriteLine("World!");
                 }
+            }
+            catch(IndexOutOfRangeException)
+            {
+                Console.WriteLine("Hello");
             }
             
 
