@@ -13,33 +13,14 @@ namespace CustomList
 
         static void Main(string[] args)
         {
-            int[] a = new int[2];
-            try
+            CustomList<int> test = new CustomList<int>();
+            Random rand = new Random();
+            while(test.Count < 26)
             {
-                while(a[5] != 3)
-                {
-                    //If the line below is commented out, the program takes a long time to start, but still writes "Hello" as normal.
-                    Console.WriteLine("feelsbadman"); Console.ReadLine();
-                }
-                // a[5] = 8;
-                try
-                {
-                    a[5] = 8;
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    Console.WriteLine("World!");
-                }
+                test.Add(rand.Next(0,100));
             }
-            catch(IndexOutOfRangeException)
-            {
-                Console.WriteLine("Hello");
-            }
-            
-
-
-
-
+            Console.WriteLine(test.ToString());
+            Console.WriteLine(test.Sort().ToString());
         }
         class Test
         {
