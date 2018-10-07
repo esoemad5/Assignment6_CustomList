@@ -13,7 +13,7 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
-        private SortHelper[] sortingArrayBob;
+        private CustomList<CustomList<SortHelper>> sortingArrayBob;
 
         public T this[int i]
         {
@@ -131,6 +131,12 @@ namespace CustomList
         {
             CustomList<T> output = new CustomList<T>();
 
+            foreach(T item in customListA)
+            {
+                //compare to everything in B and remove if matches
+                //sorting B makes this much faster
+            }
+
             return output;
         }
         public static CustomList<T> Zip(CustomList<T> customListA, CustomList<T> customListB) 
@@ -166,9 +172,9 @@ namespace CustomList
             CustomList<T> output = new CustomList<T>();
             if(data is int[])
             {
-                MakeSortingArrayBob();
-                SortBob();
-                ReOrderData();
+                MakeSortingArrayBob(MakeMiniBob());
+                MergeSortBob();
+                //ReOrderData();
             }
             return output;
         }
@@ -185,10 +191,49 @@ namespace CustomList
             }
         }
 
-
-        private void MakeSortingArrayBob()
+        private void MergeSortBob()
         {
-            sortingArrayBob = new SortHelper[count];
+            CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
+
+            for(int i = 0; i< sortingArrayBob.Count; i = i + 2)
+            {
+                try
+                {
+                    foreach(SortHelper item in sortingArrayBob[i])
+                    {
+
+                    }
+                    //sortingArrayBob[i][???] sortingArrayBob[i + 1][???];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    nextBob[i] = sortingArrayBob[i];
+                    if(i != sortingArrayBob.Count - 1)
+                    {
+                        throw new Exception("There are still array(s) left in Bob that have not been sorted.");
+                    }
+                }
+            }
+
+            sortingArrayBob = nextBob;
+            if(sortingArrayBob.Count > 1)
+            {
+                MergeSortBob();
+            }
+        }
+
+        private void MakeSortingArrayBob(CustomList<SortHelper> miniBob)
+        {
+            sortingArrayBob = new CustomList<CustomList<SortHelper>>();
+            for(int i = 0; i < count; i++)
+            {
+                sortingArrayBob[i][0] = miniBob[i];
+            }
+        }
+
+        private CustomList<SortHelper> MakeMiniBob()
+        {
+            CustomList<SortHelper> miniBob = new CustomList<SortHelper>();
 
             try
             {
@@ -201,7 +246,7 @@ namespace CustomList
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        sortingArrayBob[i] = new SortHelper(decimal.Parse(data[i].ToString()), i); // Converts any number type to decimal, throws exception for a non-string/number
+                        miniBob.Add(new SortHelper(decimal.Parse(data[i].ToString()), i)); // Converts any number type to decimal, throws exception for a non-string/number
                     }
                 }
             }
@@ -211,15 +256,20 @@ namespace CustomList
                 {
                     try
                     {
-                        sortingArrayBob[i] = new SortHelper((decimal)data[i].ToString()[0], i);// Converts strings (or Object.ToString();)
+                        miniBob.Add(new SortHelper((decimal)data[i].ToString()[0], i));// Converts strings (or Object.ToString();)
                     }
                     catch (IndexOutOfRangeException)
                     {
-                        sortingArrayBob[i] = new SortHelper((decimal)' ', i); // If the string/char is: ""
+                        miniBob.Add(new SortHelper((decimal)' ', i)); // If the string/char is: ""
                     }
                 }
             }
+
+            return miniBob;
         }
+        
+        
+        
         //Obsolete. Remove before submitting
         private decimal[] ConvertToNumber() 
         {

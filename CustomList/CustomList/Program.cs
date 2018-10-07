@@ -13,14 +13,26 @@ namespace CustomList
 
         static void Main(string[] args)
         {
+            while (true)
+            {
+                int input;
+                try
+                {
+                    input = int.Parse(Console.ReadLine());
+                }
+                catch (Exception){ continue; }
+                int[] sortingArrayBob = new int[input];
+                while (sortingArrayBob.Length > 1)
+                {
+                    int nextLength = (sortingArrayBob.Length / 2) + (sortingArrayBob.Length % 2);
+                    sortingArrayBob = new int[nextLength];
+                    Console.WriteLine(nextLength);
+                }
+            }
+            
 
-            decimal a = (decimal)5.9812734988;
-            int b = (int)a;
-            int c = 5;
-            c = c / 3; // always round down
-            Console.WriteLine(c);
-            double d = 12.123;
-            decimal e = (decimal)d;
+
+
 
         }
         class Test
