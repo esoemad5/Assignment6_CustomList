@@ -174,14 +174,12 @@ namespace CustomList
         }
         public CustomList<T> Sort()
         {
-            CustomList<T> output = new CustomList<T>();
-            if(data is int[])
-            {
-                MakeSortingArrayBob(MakeMiniBob());
-                MergeSortBob();
-                //ReOrderData();
-            }
-            return output;
+            
+            MakeSortingArrayBob(MakeMiniBob());
+            MergeSortBob();
+            CustomList<T> sortedList = ReOrderData();
+
+            return sortedList;
         }
 
         private class SortHelper
@@ -189,6 +187,7 @@ namespace CustomList
             private decimal decimalRepresentation;
             public decimal DecimalRepresentation { get => decimalRepresentation; }
             private int originalLocation;
+            public int OriginalLocation { get => originalLocation; }
 
             public SortHelper(decimal decimalRepresentation, int originalLocation)
             {
@@ -197,6 +196,25 @@ namespace CustomList
             }
         }
 
+        private CustomList<T> ReOrderData()
+        {
+            CustomList<T> sortedList = new CustomList<T>();
+
+            // These 2 lines scare me
+            sortedList.data = new T[count];
+            sortedList.count = count;
+
+            foreach(SortHelper element in sortingArrayBob[0])
+            {
+               int a= element.OriginalLocation;
+            }
+            for(int i = 0; i < count; i++)
+            {
+                sortedList[i] = data[sortingArrayBob[0][i].OriginalLocation];
+            }
+
+            return sortedList;
+        }
         private void MergeSortBob()
         {
             CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
