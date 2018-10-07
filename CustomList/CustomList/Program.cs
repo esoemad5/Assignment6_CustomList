@@ -17,10 +17,22 @@ namespace CustomList
             Random rand = new Random();
             while(test.Count < 26)
             {
-                test.Add(rand.Next(0,100));
+                if(test.Count != 5)
+                {
+                    test.Add(rand.Next(0, 100));
+                }
+                else
+                {
+                    test.Add(200);
+                }
+                
             }
+            Console.WriteLine(test.Count);
             Console.WriteLine(test.ToString());
-            Console.WriteLine(test.Sort().ToString());
+            test.Remove(200);
+            Console.WriteLine(test.Count);
+            Console.WriteLine(test.ToString());
+            //Console.WriteLine(test.Sort().ToString());
         }
         class Test
         {
