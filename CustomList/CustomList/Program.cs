@@ -13,7 +13,12 @@ namespace CustomList
 
         static void Main(string[] args)
         {
-            
+
+            decimal a = (decimal)5.9812734988;
+            int b = (int)a;
+            int c = 5;
+            c = c / 3; // always round down
+            Console.WriteLine(c);
 
 
         }

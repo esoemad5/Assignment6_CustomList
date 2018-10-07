@@ -13,6 +13,8 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
+        private SortHelper[] arrayForSorting;
+
         public T this[int i]
         {
             get
@@ -30,6 +32,13 @@ namespace CustomList
                     throw new ArgumentOutOfRangeException();
                 }
                 data[i] = value;
+            }
+        }
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return data[i];
             }
         }
 
@@ -118,7 +127,7 @@ namespace CustomList
             }
             return output;
         }
-        public static CustomList<T> operator- (CustomList<T> customListA, CustomList<T> customListB) // hold off on this until after Sort. May want to overload <, >, and =
+        public static CustomList<T> operator- (CustomList<T> customListA, CustomList<T> customListB) // hold off on this until after Sort.
         {
             CustomList<T> output = new CustomList<T>();
 
@@ -162,6 +171,18 @@ namespace CustomList
                 ReOrderList(indices);
             }
             return output;
+        }
+
+        private class SortHelper
+        {
+            decimal decimalRepresentation;
+            int originalLocation;
+
+            public SortHelper(decimal decimalRepresentation, int originalLocation)
+            {
+                this.decimalRepresentation = decimalRepresentation;
+                this.originalLocation = originalLocation;
+            }
         }
 
         private decimal[] ConvertToNumber() 
@@ -208,16 +229,23 @@ namespace CustomList
             while (list2D.Count != 1)
             {
                 CustomList<CustomList<decimal>> nextList = new CustomList<CustomList<decimal>>();
-                for (int i = 0; i < list2D.Count; i++)
+                for (int i = 0; i < list2D.Count; i = i + 2)
                 {
                     try
                     {
                         // merge lists 2 by 2
                         // store lists in nextList
                         CustomList<decimal> element = new CustomList<decimal>();
-                        for(int j = 0; j < list2D[i].Count; j++) // this might be totally bad
-                        {
 
+                        CustomList<decimal> section1 = list2D[i];
+                        CustomList<decimal> section2 = list2D[i+1];
+
+                        for (int j = 0; j < section1.Count; j++) // this might be totally bad
+                        {
+                            for(int k = 0; k < section2.Count; k++)
+                            {
+                                //if(section1[j])
+                            }
                         }
                         nextList.Add(element);
                         // note the indices in indices when swapping
@@ -259,12 +287,6 @@ namespace CustomList
             data = newData;
         }
 
-        public IEnumerator GetEnumerator()
-        {
-            for(int i = 0; i < count; i++)
-            {
-                yield return data[i];
-            }
-        }
+        
     }
 }
