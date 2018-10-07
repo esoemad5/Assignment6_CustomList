@@ -176,7 +176,10 @@ namespace CustomList
         {
             
             MakeSortingArrayBob(MakeMiniBob());
+            Console.WriteLine(sortingArrayBob.ToString());
+            Console.WriteLine("hello");
             MergeSortBob();
+            Console.WriteLine("world");
             CustomList<T> sortedList = ReOrderData();
 
             return sortedList;
@@ -194,6 +197,16 @@ namespace CustomList
                 this.decimalRepresentation = decimalRepresentation;
                 this.originalLocation = originalLocation;
             }
+            public override string ToString()
+            {
+                string output = "";
+                output += "(Decimal: ";
+                output += DecimalRepresentation;
+                output += ") (OriginalIndex: ";
+                output += originalLocation;
+                output += ")";
+                return output;
+            }
         }
 
         private CustomList<T> ReOrderData()
@@ -204,10 +217,6 @@ namespace CustomList
             sortedList.data = new T[count];
             sortedList.count = count;
 
-            foreach(SortHelper element in sortingArrayBob[0])
-            {
-               int a= element.OriginalLocation;
-            }
             for(int i = 0; i < count; i++)
             {
                 sortedList[i] = data[sortingArrayBob[0][i].OriginalLocation];
@@ -218,14 +227,17 @@ namespace CustomList
         private void MergeSortBob()
         {
             CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
-
+            int mergeSortCounter = 0;//debuggingLine
             for(int i = 0; i< sortingArrayBob.Count; i = i + 2)
             {
+                int whileLoopCounter = 0;//debuggingLine
                 nextBob.Add(new CustomList<SortHelper>());
                 try
                 {
                     while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0)
                     {
+                        Console.WriteLine("MSC: {0}, i: {1}, WLC: {2}",mergeSortCounter, i, whileLoopCounter);//debuggingLine
+                        whileLoopCounter++;
                         try
                         {
                             if(sortingArrayBob[i][0].DecimalRepresentation > sortingArrayBob[1 + 1][0].DecimalRepresentation)
@@ -280,7 +292,6 @@ namespace CustomList
             sortingArrayBob = new CustomList<CustomList<SortHelper>>();
             for(int i = 0; i < count; i++)
             {
-                Console.WriteLine(i);
                 sortingArrayBob.Add(new CustomList<SortHelper>());
                 sortingArrayBob[i].Add(null);
                 sortingArrayBob[i][0] = miniBob[i];
