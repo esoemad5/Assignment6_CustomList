@@ -19,7 +19,8 @@ namespace CustomList
             int c = 5;
             c = c / 3; // always round down
             Console.WriteLine(c);
-
+            double d = 12.123;
+            decimal e = (decimal)d;
 
         }
         class Test

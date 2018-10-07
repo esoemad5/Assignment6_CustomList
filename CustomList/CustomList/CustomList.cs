@@ -13,7 +13,7 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
-        private SortHelper[] arrayForSorting;
+        private SortHelper[] sortingArrayBob;
 
         public T this[int i]
         {
@@ -166,17 +166,17 @@ namespace CustomList
             CustomList<T> output = new CustomList<T>();
             if(data is int[])
             {
-                decimal[] decimalRepresentation = ConvertToNumber();
-                int[] indices = MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimalRepresentation); // TODO
-                ReOrderList(indices);
+                MakeSortingArrayBob();
+                SortBob();
+                ReOrderData();
             }
             return output;
         }
 
         private class SortHelper
         {
-            decimal decimalRepresentation;
-            int originalLocation;
+            private decimal decimalRepresentation;
+            private int originalLocation;
 
             public SortHelper(decimal decimalRepresentation, int originalLocation)
             {
@@ -185,6 +185,42 @@ namespace CustomList
             }
         }
 
+
+        private void MakeSortingArrayBob()
+        {
+            sortingArrayBob = new SortHelper[count];
+
+            try
+            {
+                // make sure sorting function just returns for length zero lists or this will throw an exception
+                if (data[0] is string) // so strings like " 0823" dont get converted here
+                {
+                    throw new FormatException();
+                }
+                else
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        sortingArrayBob[i] = new SortHelper(decimal.Parse(data[i].ToString()), i); // Converts any number type to decimal, throws exception for a non-string/number
+                    }
+                }
+            }
+            catch (FormatException) // convert anything thats not a number
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    try
+                    {
+                        sortingArrayBob[i] = new SortHelper((decimal)data[i].ToString()[0], i);// Converts strings (or Object.ToString();)
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        sortingArrayBob[i] = new SortHelper((decimal)' ', i); // If the string/char is: ""
+                    }
+                }
+            }
+        }
+        //Obsolete. Remove before submitting
         private decimal[] ConvertToNumber() 
         {
             decimal[] output = new decimal[count];
