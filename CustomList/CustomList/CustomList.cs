@@ -280,6 +280,9 @@ namespace CustomList
             sortingArrayBob = new CustomList<CustomList<SortHelper>>();
             for(int i = 0; i < count; i++)
             {
+                Console.WriteLine(i);
+                sortingArrayBob.Add(new CustomList<SortHelper>());
+                sortingArrayBob[i].Add(null);
                 sortingArrayBob[i][0] = miniBob[i];
             }
         }
