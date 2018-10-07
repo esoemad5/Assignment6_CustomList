@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Diagnostics;
+
 namespace CustomList
 {
     public class CustomList<T> : System.Collections.IEnumerable
@@ -177,9 +179,9 @@ namespace CustomList
             
             MakeSortingArrayBob(MakeMiniBob());
             Console.WriteLine(sortingArrayBob.ToString());
-            Console.WriteLine("hello");
+            Console.WriteLine("---------------------------------------------------");
             MergeSortBob();
-            Console.WriteLine("world");
+            Console.WriteLine("---------------------------------------------------");
             CustomList<T> sortedList = ReOrderData();
 
             return sortedList;
@@ -234,25 +236,40 @@ namespace CustomList
                 nextBob.Add(new CustomList<SortHelper>());
                 try
                 {
+                    Console.WriteLine("MSC: {0}, i: {1}, WLC: {2}", mergeSortCounter, i, whileLoopCounter);//debuggingLine
+                    Console.WriteLine("Bob: {0}, InnerBob: {1}", sortingArrayBob.Count, sortingArrayBob[i].Count);//db
                     while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0)
                     {
-                        Console.WriteLine("MSC: {0}, i: {1}, WLC: {2}",mergeSortCounter, i, whileLoopCounter);//debuggingLine
-                        whileLoopCounter++;
+                        
+                        whileLoopCounter++;//db
                         try
                         {
-                            if(sortingArrayBob[i][0].DecimalRepresentation > sortingArrayBob[1 + 1][0].DecimalRepresentation)
+                            if(sortingArrayBob[i][0].DecimalRepresentation > sortingArrayBob[i + 1][0].DecimalRepresentation)
                             {
                                 nextBob[i].Add(sortingArrayBob[i][0]);
+                                sortingArrayBob[i].Remove(sortingArrayBob[i][0]);
                             }
                             else
                             {
                                 nextBob[i].Add(sortingArrayBob[i+1][0]);
+                                sortingArrayBob[i+1].Remove(sortingArrayBob[i+1][0]);
                             }
                             
                         }
-                        catch (ArgumentOutOfRangeException)
+                        catch (ArgumentOutOfRangeException ex)
                         {
+                            Console.WriteLine("---------------------------------------------------");
                             Console.WriteLine("Out of range inside while loop of MergeSort. This should be impossible.");
+                            // Get stack trace for the exception with source file information
+                            var st = new StackTrace(ex, true);
+                            // Get the top stack frame
+                            var frame = st.GetFrame(0);
+                            // Get the line number from the stack frame
+                            var line = frame.GetFileLineNumber();
+                            Console.WriteLine(st);
+
+                            Console.WriteLine("---------------------------------------------------");
+                            break;
                         }
                     }
                     if(sortingArrayBob[i].Count > 0)
