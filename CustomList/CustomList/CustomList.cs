@@ -277,6 +277,7 @@ namespace CustomList
                         foreach(SortHelper extraThing in sortingArrayBob[i])
                         {
                             nextBob[i].Add(extraThing);
+                            sortingArrayBob[i].Remove(extraThing);
                         }
                     }
                     else
@@ -284,12 +285,14 @@ namespace CustomList
                         foreach (SortHelper extraThing in sortingArrayBob[i+1])
                         {
                             nextBob[i].Add(extraThing);
+                            sortingArrayBob[i+1].Remove(extraThing);
                         }
                     }
                 }
                 catch (ArgumentOutOfRangeException)
                 {
                     nextBob[i] = sortingArrayBob[i];
+                    sortingArrayBob.Remove(sortingArrayBob[i]);
                     if(i != sortingArrayBob.Count - 1)
                     {
                         throw new Exception("There are still array(s) left in Bob that have not been sorted.");
