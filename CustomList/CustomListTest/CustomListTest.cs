@@ -7,7 +7,7 @@ namespace CustomListTest
     [TestClass]
     public class CustomListTest
     {
-        // Add | 4 tests
+// Add | 4 tests
         [TestMethod]
         public void Add_ValueToEmptyList_ValueInList()
         {
@@ -78,7 +78,7 @@ namespace CustomListTest
         }
 
 
-        // Count | 8 tests
+// Count | 8 tests
         [TestMethod]
         public void Count_NewObject_0()
         {
@@ -206,7 +206,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        // Remove | 11 tests
+// Remove | 11 tests
         [TestMethod]
         public void Remove_ListOnlyContainsObject_EmptyList()
         {
@@ -376,7 +376,7 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        // ToString | 3 tests
+// ToString | 3 tests
         [TestMethod]
         public void ToString_3Elements_StringComprisedOfTheElements()
         {
@@ -421,7 +421,7 @@ namespace CustomListTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        // + | 4 Tests
+// + | 4 Tests
         [TestMethod]
         public void AdditionOperatorOverload_TwoNonEmptyLists_ConcatenatedList()
         {
@@ -502,7 +502,7 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        // - | 7 Tests
+// - | 7 Tests
         [TestMethod]
         public void SubtractionOperatorOverload_MinuendContainsPartOrAllOfTheSubtrahend_ShortenedList()
         {
@@ -641,7 +641,7 @@ namespace CustomListTest
         }
 
 
-        // Zip | 8 Tests
+// Zip | 8 Tests
         [TestMethod]
         public void Zip_ListsOfEqualLengths_ZippedList()
         {
@@ -802,7 +802,7 @@ namespace CustomListTest
             Assert.IsTrue(ListsAreEqual(expectedResult, result));
         }
 
-        // Indexer | 8 Tests
+// Indexer | 8 Tests
         [TestMethod]
         public void IndexerGet_1ElementList_ValueAtIndex()
         {
@@ -899,9 +899,9 @@ namespace CustomListTest
             customList[9] = 5;
         }
 
-        // Sort
+// Sort
         [TestMethod]
-        public void Sort_IntegersAllUnique_SortedLlist()
+        public void Sort_IntegersAllUnique_SortedList()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
@@ -924,7 +924,7 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void Sort_IntegersSomeAreRepeated_SortedLlist()
+        public void Sort_IntegersSomeAreRepeated_SortedList()
         {
             //Arrange
             CustomList<int> customList = new CustomList<int>();
@@ -947,7 +947,7 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void Sort_StringAllUnique_SortedLlist()
+        public void Sort_StringAllUnique_SortedList()
         {
             //Arrange
             CustomList<string> customList = new CustomList<string>();
@@ -970,7 +970,7 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void Sort_StringsSomeAreRepeated_SortedLlist()
+        public void Sort_StringsSomeAreRepeated_SortedList()
         {
             //Arrange
             CustomList<string> customList = new CustomList<string>();
@@ -1000,7 +1000,7 @@ namespace CustomListTest
          * Do I need to test to make sure CustomList.Sort uses ToString???
          */
 
-        // Iterable
+// Iterable
         [TestMethod]
         public void GetEnumerator_NonEmptyList_OriginalList()
         {

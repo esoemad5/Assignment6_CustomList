@@ -178,10 +178,8 @@ namespace CustomList
         {
             
             MakeSortingArrayBob(MakeMiniBob());
-            Console.WriteLine(sortingArrayBob.ToString());
-            Console.WriteLine("---------------------------------------------------");
+            //Console.WriteLine(sortingArrayBob.ToString());//db
             MergeSortBob();
-            Console.WriteLine("---------------------------------------------------");
             CustomList<T> sortedList = ReOrderData();
 
             return sortedList;
@@ -355,6 +353,48 @@ namespace CustomList
         
         
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Obsolete. Remove before submitting
         private decimal[] ConvertToNumber() 
         {

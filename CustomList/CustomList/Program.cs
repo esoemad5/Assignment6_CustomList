@@ -13,25 +13,26 @@ namespace CustomList
 
         static void Main(string[] args)
         {
-            CustomList<CustomList<int>> test = new CustomList<CustomList<int>>();
-            Random rand = new Random();
 
-            CustomList<int> b = new CustomList<int>();
-            /*
-            b.Add(5);
-            test.Add(b);
-            Console.WriteLine(test.Count);
-            Console.WriteLine(test.ToString());
-            test.Remove(b);*/
-            while(test.Count < 26)
-            {
-                CustomList<int> qwer = new CustomList<int>();
-                qwer.Add(rand.Next(0, 100));
-                test.Add(qwer);
-            }
-            Console.WriteLine(test.Count);
-            Console.WriteLine(test.ToString());
-            Console.WriteLine(test.Sort().ToString());
+            CustomList<int> customList = new CustomList<int>();
+            customList.Add(4);
+            customList.Add(2);
+            customList.Add(9);
+            customList.Add(11);
+            customList.Add(8);
+
+            CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(2);
+            expectedResult.Add(4);
+            expectedResult.Add(8);
+            expectedResult.Add(9);
+            expectedResult.Add(11);
+            //Act
+            CustomList<int> result = customList.Sort();
+
+            Console.WriteLine("Results: ");
+            Console.WriteLine("Original: {0}; Count: {1}", customList.ToString(), customList.Count);
+            Console.WriteLine("Sorted:   {0}; Count: {1}", result.ToString(), result.Count);
         }
         class Test
         {
@@ -109,7 +110,21 @@ namespace CustomList
             }
             */
         }
+        private void TestSortWithListOf26RandomInts()
+        {
+            CustomList<CustomList<int>> test = new CustomList<CustomList<int>>();
+            Random rand = new Random();
 
+            while (test.Count < 26)
+            {
+                CustomList<int> qwer = new CustomList<int>();
+                qwer.Add(rand.Next(0, 100));
+                test.Add(qwer);
+            }
+            Console.WriteLine(test.Count);
+            Console.WriteLine(test.ToString());
+            Console.WriteLine(test.Sort().ToString());
+        }
         /*
         private void MergeSortBob()
         {
