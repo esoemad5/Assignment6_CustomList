@@ -228,31 +228,22 @@ namespace CustomList
         }
         private void MergeSortBob()
         {
-            int mergeSortCounter = 0;//debuggingLine
 
             CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
 
-            for(int i = 0; i< sortingArrayBob.Count; i = i + 2)
+            for(int i = 0; i < sortingArrayBob.Count-1; i = i + 2)
             {
 
                 int whileLoopCounter = 0;//debuggingLine
 
                 CustomList<SortHelper>  nextElement = new CustomList<SortHelper>();
 
-                bool atTheOddElementOfBob = false;
-                if(i == sortingArrayBob.Count - 1)
+                while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0)
                 {
-                    atTheOddElementOfBob = true;
-                }
-
-                Console.WriteLine("MSC: {0}, i: {1}, WLC: {2}", mergeSortCounter, i, whileLoopCounter);//debuggingLine
-                Console.WriteLine("Bob: {0}, InnerBob: {1}", sortingArrayBob.Count, sortingArrayBob[i].Count);//db
-                
-
-                while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0 && !atTheOddElementOfBob)
-                {
-
+                    Console.WriteLine("i: {0}, WLC: {1}", i, whileLoopCounter);//debuggingLine
+                    Console.WriteLine("Bob: {0}, InnerBobLeft: {1}, InnerBobRight: {2}", sortingArrayBob.Count, sortingArrayBob[i].Count, sortingArrayBob[i + 1].Count);//db
                     whileLoopCounter++;//db
+                    Console.WriteLine("---------------------------------------------------");
 
                     try
                     {
@@ -294,6 +285,16 @@ namespace CustomList
                     sortingArrayBob[i + 1].Remove(sortingArrayBob[i + 1][0]);
                 }
 
+                nextBob.Add(nextElement);
+            }
+            if(sortingArrayBob.Count % 2 == 1)
+            {
+                CustomList<SortHelper> nextElement = new CustomList<SortHelper>();
+                while (sortingArrayBob[sortingArrayBob.Count - 1].Count > 0)
+                {
+                    nextElement.Add(sortingArrayBob[sortingArrayBob.Count - 1][0]);
+                    sortingArrayBob[sortingArrayBob.Count - 1].Remove(sortingArrayBob[sortingArrayBob.Count - 1][0]);
+                }
                 nextBob.Add(nextElement);
             }
 
