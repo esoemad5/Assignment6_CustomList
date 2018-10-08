@@ -17,28 +17,21 @@ namespace CustomList
             Random rand = new Random();
 
             CustomList<int> b = new CustomList<int>();
-            while (test.Count < 26)
+            /*
+            b.Add(5);
+            test.Add(b);
+            Console.WriteLine(test.Count);
+            Console.WriteLine(test.ToString());
+            test.Remove(b);*/
+            while(test.Count < 26)
             {
-                if(test.Count != 5)
-                {
-                    CustomList<int> a = new CustomList<int>();
-                    a.Add(rand.Next(0, 100));
-                    test.Add(a);
-                }
-                else
-                {
-                    
-                    b.Add(200);
-                    test.Add(b);
-                }
-                
+                CustomList<int> qwer = new CustomList<int>();
+                qwer.Add(rand.Next(0, 100));
+                test.Add(qwer);
             }
             Console.WriteLine(test.Count);
             Console.WriteLine(test.ToString());
-            test.Remove(b);
-            Console.WriteLine(test.Count);
-            Console.WriteLine(test.ToString());
-            //Console.WriteLine(test.Sort().ToString());
+            Console.WriteLine(test.Sort().ToString());
         }
         class Test
         {
@@ -117,23 +110,111 @@ namespace CustomList
             */
         }
 
-
-
-
-        class Node<T>
+        /*
+        private void MergeSortBob()
         {
-            T data;
-            Node<T> next;
-            public Node (T data)
+            CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
+            int mergeSortCounter = 0;//debuggingLine
+            for (int i = 0; i < sortingArrayBob.Count; i = i + 2)
             {
-                this.data = data;
-            }
-            public Node(T data, Node<T> next)
-            {
-                this.data = data;
-                this.next = next;
+                int whileLoopCounter = 0;//debuggingLine
+                nextBob.Add(new CustomList<SortHelper>());
+                try
+                {
+                    Console.WriteLine("MSC: {0}, i: {1}, WLC: {2}", mergeSortCounter, i, whileLoopCounter);//debuggingLine
+                    Console.WriteLine("Bob: {0}, InnerBob: {1}", sortingArrayBob.Count, sortingArrayBob[i].Count);//db
+                    while (sortingArrayBob[i].Count != 0 && sortingArrayBob[i + 1].Count != 0)
+                    {
+
+                        whileLoopCounter++;//db
+                        try
+                        {
+                            if (sortingArrayBob[i][0].DecimalRepresentation > sortingArrayBob[i + 1][0].DecimalRepresentation)
+                            {
+                                nextBob[i].Add(sortingArrayBob[i][0]);
+                                sortingArrayBob.Remove(sortingArrayBob[i]);
+                            }
+                            else
+                            {
+                                nextBob[i].Add(sortingArrayBob[i + 1][0]);
+                                sortingArrayBob.Remove(sortingArrayBob[i + 1]);
+                            }
+
+                        }
+                        catch (ArgumentOutOfRangeException ex)
+                        {
+                            Console.WriteLine("---------------------------------------------------");
+                            Console.WriteLine("Out of range inside while loop of MergeSort. This should be impossible.");
+                            // Get stack trace for the exception with source file information
+                            var st = new StackTrace(ex, true);
+                            // Get the top stack frame
+                            var frame = st.GetFrame(0);
+                            // Get the line number from the stack frame
+                            var line = frame.GetFileLineNumber();
+                            Console.WriteLine(st);
+
+                            Console.WriteLine("---------------------------------------------------");
+                            break;
+                        }
+                    }
+                    if (sortingArrayBob[i].Count > 0)
+                    {
+                        foreach (SortHelper extraThing in sortingArrayBob[i])
+                        {
+                            nextBob[i].Add(extraThing);
+                        }
+                        sortingArrayBob.Remove(sortingArrayBob[i]);
+                    }
+                    else
+                    {
+                        foreach (SortHelper extraThing in sortingArrayBob[i + 1])
+                        {
+                            nextBob[i].Add(extraThing);
+                            sortingArrayBob[i + 1].Remove(extraThing);
+                        }
+                    }
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    nextBob[i] = sortingArrayBob[i];
+                    sortingArrayBob.Remove(sortingArrayBob[i]);
+                    if (i != sortingArrayBob.Count - 1)
+                    {
+                        throw new Exception("There are still array(s) left in Bob that have not been sorted.");
+                    }
+                }
             }
 
+            sortingArrayBob = nextBob;
+            if (sortingArrayBob.Count > 1)
+            {
+                MergeSortBob();
+            }
         }
+        */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

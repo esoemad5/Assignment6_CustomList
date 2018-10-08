@@ -228,76 +228,73 @@ namespace CustomList
         }
         private void MergeSortBob()
         {
-            CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
             int mergeSortCounter = 0;//debuggingLine
+
+            CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
+
             for(int i = 0; i< sortingArrayBob.Count; i = i + 2)
             {
-                int whileLoopCounter = 0;//debuggingLine
-                nextBob.Add(new CustomList<SortHelper>());
-                try
-                {
-                    Console.WriteLine("MSC: {0}, i: {1}, WLC: {2}", mergeSortCounter, i, whileLoopCounter);//debuggingLine
-                    Console.WriteLine("Bob: {0}, InnerBob: {1}", sortingArrayBob.Count, sortingArrayBob[i].Count);//db
-                    while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0)
-                    {
-                        
-                        whileLoopCounter++;//db
-                        try
-                        {
-                            if(sortingArrayBob[i][0].DecimalRepresentation > sortingArrayBob[i + 1][0].DecimalRepresentation)
-                            {
-                                nextBob[i].Add(sortingArrayBob[i][0]);
-                                sortingArrayBob[i].Remove(sortingArrayBob[i][0]);
-                            }
-                            else
-                            {
-                                nextBob[i].Add(sortingArrayBob[i+1][0]);
-                                sortingArrayBob[i+1].Remove(sortingArrayBob[i+1][0]);
-                            }
-                            
-                        }
-                        catch (ArgumentOutOfRangeException ex)
-                        {
-                            Console.WriteLine("---------------------------------------------------");
-                            Console.WriteLine("Out of range inside while loop of MergeSort. This should be impossible.");
-                            // Get stack trace for the exception with source file information
-                            var st = new StackTrace(ex, true);
-                            // Get the top stack frame
-                            var frame = st.GetFrame(0);
-                            // Get the line number from the stack frame
-                            var line = frame.GetFileLineNumber();
-                            Console.WriteLine(st);
 
-                            Console.WriteLine("---------------------------------------------------");
-                            break;
-                        }
-                    }
-                    if(sortingArrayBob[i].Count > 0)
-                    {
-                        foreach(SortHelper extraThing in sortingArrayBob[i])
-                        {
-                            nextBob[i].Add(extraThing);
-                            sortingArrayBob[i].Remove(extraThing);
-                        }
-                    }
-                    else
-                    {
-                        foreach (SortHelper extraThing in sortingArrayBob[i+1])
-                        {
-                            nextBob[i].Add(extraThing);
-                            sortingArrayBob[i+1].Remove(extraThing);
-                        }
-                    }
-                }
-                catch (ArgumentOutOfRangeException)
+                int whileLoopCounter = 0;//debuggingLine
+
+                CustomList<SortHelper>  nextElement = new CustomList<SortHelper>();
+
+                bool atTheOddElementOfBob = false;
+                if(i == sortingArrayBob.Count - 1)
                 {
-                    nextBob[i] = sortingArrayBob[i];
-                    sortingArrayBob.Remove(sortingArrayBob[i]);
-                    if(i != sortingArrayBob.Count - 1)
+                    atTheOddElementOfBob = true;
+                }
+
+                Console.WriteLine("MSC: {0}, i: {1}, WLC: {2}", mergeSortCounter, i, whileLoopCounter);//debuggingLine
+                Console.WriteLine("Bob: {0}, InnerBob: {1}", sortingArrayBob.Count, sortingArrayBob[i].Count);//db
+                
+
+                while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0 && !atTheOddElementOfBob)
+                {
+
+                    whileLoopCounter++;//db
+
+                    try
                     {
-                        throw new Exception("There are still array(s) left in Bob that have not been sorted.");
+                        if(sortingArrayBob[i][0].DecimalRepresentation <= sortingArrayBob[i + 1][0].DecimalRepresentation)
+                        {
+                            nextElement.Add(sortingArrayBob[i][0]);
+                            sortingArrayBob[i].Remove(sortingArrayBob[i][0]);
+                        }
+                        else
+                        {
+                            nextElement.Add(sortingArrayBob[i + 1][0]);
+                            sortingArrayBob[i + 1].Remove(sortingArrayBob[i + 1][0]);
+                        }
+                            
+                    }
+                    catch (ArgumentOutOfRangeException ex)
+                    {
+                        Console.WriteLine("---------------------------------------------------");
+                        Console.WriteLine("Out of range inside while loop of MergeSort. This should be impossible.");
+                        // Get stack trace for the exception with source file information
+                        var st = new StackTrace(ex, true);
+                        // Get the top stack frame
+                        var frame = st.GetFrame(0);
+                        // Get the line number from the stack frame
+                        var line = frame.GetFileLineNumber();
+                        Console.WriteLine(st);
+
+                        Console.WriteLine("---------------------------------------------------");
                     }
                 }
+                while(sortingArrayBob[i].Count > 0)
+                {
+                    nextElement.Add(sortingArrayBob[i][0]);
+                    sortingArrayBob[i].Remove(sortingArrayBob[i][0]);
+                }
+                while (sortingArrayBob[i + 1].Count > 0)
+                {
+                    nextElement.Add(sortingArrayBob[i + 1][0]);
+                    sortingArrayBob[i + 1].Remove(sortingArrayBob[i + 1][0]);
+                }
+
+                nextBob.Add(nextElement);
             }
 
             sortingArrayBob = nextBob;
