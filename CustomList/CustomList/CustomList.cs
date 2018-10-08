@@ -63,7 +63,7 @@ namespace CustomList
             }
             catch (IndexOutOfRangeException)
             {
-                data = MakeNewArray();
+                data = EnlargeArray();
                 data[count] = input;
             }
             finally
@@ -72,7 +72,7 @@ namespace CustomList
             }
         }
 
-        private T[] MakeNewArray()
+        private T[] EnlargeArray()
         {
             T[] output = new T[data.Length * 2];
             for (int i = 0; i < data.Length; i++)
@@ -192,7 +192,7 @@ namespace CustomList
                     return SearchSortedListFor(target, middleIndex, end, sortedList);
                 }
 
-                throw new Exception("Not greater-than, less-than, or equal-to. Someone call Euler!!!");
+                throw new Exception("Element is not greater-than, less-than, or equal-to the target. Someone call Euler!!!");
             }
         }
 
@@ -292,40 +292,26 @@ namespace CustomList
             {
                 CustomList<SortHelper> nextElement = new CustomList<SortHelper>();
 
-                while (sortHelperList2D[i].Count != 0 && sortHelperList2D[i + 1].Count != 0)
+                while (sortHelperList2D[i].Count != 0 && sortHelperList2D[i + 1].Count != 0) // Merge 2 lists
                 {
-                    try
+                    if (sortHelperList2D[i][0].DecimalRepresentation <= sortHelperList2D[i + 1][0].DecimalRepresentation)
                     {
-                        if (sortHelperList2D[i][0].DecimalRepresentation <= sortHelperList2D[i + 1][0].DecimalRepresentation)
-                        {
-                            nextElement.Add(sortHelperList2D[i][0]);
-                            sortHelperList2D[i].Remove(sortHelperList2D[i][0]);
-                        }
-                        else
-                        {
-                            nextElement.Add(sortHelperList2D[i + 1][0]);
-                            sortHelperList2D[i + 1].Remove(sortHelperList2D[i + 1][0]);
-                        }
-
+                        nextElement.Add(sortHelperList2D[i][0]);
+                        sortHelperList2D[i].Remove(sortHelperList2D[i][0]);
                     }
-                    catch (ArgumentOutOfRangeException ex)
+                    else
                     {
-                        Console.WriteLine("Out of range inside while loop of MergeSort. This should be impossible.");
-                        // Get stack trace for the exception with source file information
-                        var st = new StackTrace(ex, true);
-                        // Get the top stack frame
-                        var frame = st.GetFrame(0);
-                        // Get the line number from the stack frame
-                        var line = frame.GetFileLineNumber();
-                        Console.WriteLine(st);
+                        nextElement.Add(sortHelperList2D[i + 1][0]);
+                        sortHelperList2D[i + 1].Remove(sortHelperList2D[i + 1][0]);
                     }
                 }
-                while (sortHelperList2D[i].Count > 0)
+
+                while (sortHelperList2D[i].Count > 0) // Add the leftovers
                 {
                     nextElement.Add(sortHelperList2D[i][0]);
                     sortHelperList2D[i].Remove(sortHelperList2D[i][0]);
                 }
-                while (sortHelperList2D[i + 1].Count > 0)
+                while (sortHelperList2D[i + 1].Count > 0) // ibid
                 {
                     nextElement.Add(sortHelperList2D[i + 1][0]);
                     sortHelperList2D[i + 1].Remove(sortHelperList2D[i + 1][0]);
@@ -333,7 +319,8 @@ namespace CustomList
 
                 next2DList.Add(nextElement);
             }
-            if (sortHelperList2D.Count % 2 == 1)
+
+            if (sortHelperList2D.Count % 2 == 1) // If there are an odd number of lists, just add the last one to the end of next2DList since it didn't get to merge this time.
             {
                 next2DList.Add(sortHelperList2D[sortHelperList2D.Count - 1]);
             }
