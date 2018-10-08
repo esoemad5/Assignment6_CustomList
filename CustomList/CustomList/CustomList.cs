@@ -387,6 +387,10 @@ namespace CustomList
                     }
                 }
             }
+            catch (IndexOutOfRangeException)
+            {
+                return new CustomList<SortHelper>();
+            }
 
             return sortHelperList;
         }

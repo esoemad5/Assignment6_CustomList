@@ -14,24 +14,18 @@ namespace CustomList
         static void Main(string[] args)
         {
 
+            //Arrange
             CustomList<int> list1 = new CustomList<int>();
             CustomList<int> list2 = new CustomList<int>();
-            list1.Add(1);
-            list1.Add(2);
-            list1.Add(3);
-            list2.Add(3);
-            list2.Add(4);
-            list2.Add(5);
 
             CustomList<int> expectedResult = new CustomList<int>();
-            expectedResult.Add(1);
-            expectedResult.Add(2);
             //Act
             CustomList<int> result = (list1 - list2);
 
+            //Assert
             Console.WriteLine(expectedResult.ToString());
             Console.WriteLine(result.ToString());
-            ListsAreEqual(expectedResult, result);
+            Console.WriteLine(ListsAreEqual(expectedResult, result));
         }
         class Test
         {
