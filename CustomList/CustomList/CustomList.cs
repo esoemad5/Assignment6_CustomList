@@ -166,12 +166,13 @@ namespace CustomList
                 {
                     return false;
                 }
-                if (target.IsGreaterThan(list[middleIndex]){
-                    SearchSortedListFor(target, middleIndex, end);
-                }
-                if (target.IsLessThan(list[middleIndex]))
+                if (list[middleIndex].IsGreaterThan(target))
                 {
-                    SearchSortedListFor(target, start, middleIndex);
+                    SearchSortedListFor(target, start, middleIndex, list);
+                }
+                if (list[middleIndex].IsLessThan(target))
+                {
+                    SearchSortedListFor(target, middleIndex, end, list);
                 }
 
                 throw new Exception("Not greater-than, less-than, or equal-to. Someone call Euler!!!");
@@ -236,6 +237,14 @@ namespace CustomList
                 output += originalLocation;
                 output += ")";
                 return output;
+            }
+            public bool IsGreaterThan(decimal number)
+            {
+                return decimalRepresentation > number;
+            }
+            public bool IsLessThan(decimal number)
+            {
+                return decimalRepresentation < number;
             }
         }
 
