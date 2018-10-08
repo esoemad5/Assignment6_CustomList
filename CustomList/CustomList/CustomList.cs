@@ -15,7 +15,7 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
-        // This variable is only used for sorting and will not be instantiated until CustomList<T>.Sort is called.
+        // This variable is not be instantiated in the constructor. Call: MakeSortHelperList2D(MakeSortHelperList()); to instantiate it. Adding/removing does NOT update this list.
         private CustomList<CustomList<SortHelper>> sortHelperList2D;
 
         public T this[int i]
@@ -51,8 +51,6 @@ namespace CustomList
             count = 0;
         }
 
-        // Going to do the thing where adding stuff doubles data.Length sometimes, but count remains accurate. How to test for data.Length???
-        // data.Length changing is not an externally visible outcome; it need not be tested.
         public void Add(T input)
         {
             try
@@ -137,14 +135,47 @@ namespace CustomList
         public static CustomList<T> operator- (CustomList<T> customListA, CustomList<T> customListB) // hold off on this until after Sort.
         {
             CustomList<T> output = new CustomList<T>();
+            customListB = customListB.Sort();
+            CustomList<SortHelper> sortHelperA = customListA.MakeSortHelperList();
+            CustomList<SortHelper> sortHelperB = customListB.MakeSortHelperList();
 
-            foreach(T item in customListA)
+            for(int i = 0; i < customListA.Count; i++)
             {
-                //compare to everything in B and remove if matches
-                //sorting B makes this much faster
+                if (SearchSortedListFor(sortHelperA[i].DecimalRepresentation, 0, sortHelperB.Count - 1, sortHelperB))
+                {
+                    // Do nothing.
+                }
+                else
+                {
+                    output.Add(customListA[i]);
+                }
             }
 
             return output;
+        }
+        private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> list)// Only use this method on <SortHelper> lists!
+        {
+            int middleIndex = (end - start) / 2;
+            if (target.Equals(list[middleIndex]))
+            {
+                return true;
+            }
+            else
+            {
+                if(start == end)
+                {
+                    return false;
+                }
+                if (target.IsGreaterThan(list[middleIndex]){
+                    SearchSortedListFor(target, middleIndex, end);
+                }
+                if (target.IsLessThan(list[middleIndex]))
+                {
+                    SearchSortedListFor(target, start, middleIndex);
+                }
+
+                throw new Exception("Not greater-than, less-than, or equal-to. Someone call Euler!!!");
+            }
         }
         public static CustomList<T> Zip(CustomList<T> customListA, CustomList<T> customListB) 
         {
@@ -177,7 +208,7 @@ namespace CustomList
         public CustomList<T> Sort()
         {
             
-            MakeSortHelperList2D(ConvertToSortHelper());
+            MakeSortHelperList2D(MakeSortHelperList());
             MergeSort();
             CustomList<T> sortedList = ReOrderData();
 
@@ -212,7 +243,6 @@ namespace CustomList
         {
             CustomList<T> sortedList = new CustomList<T>();
 
-            // These 2 lines scare me
             sortedList.data = new T[count];
             sortedList.count = count;
 
@@ -304,7 +334,7 @@ namespace CustomList
             }
         }
 
-        private CustomList<SortHelper> ConvertToSortHelper()
+        private CustomList<SortHelper> MakeSortHelperList()
         {
             CustomList<SortHelper> sortHelperList = new CustomList<SortHelper>();
 
@@ -339,7 +369,6 @@ namespace CustomList
 
             return sortHelperList;
         }
-        
-        
+
     }
 }
