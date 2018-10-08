@@ -143,16 +143,16 @@ namespace CustomList
             {
                 if(customListA[i].Equals(customListB[0]) || customListA[i].Equals(customListB[customListB.count - 1]))
                 {
-                    Console.WriteLine("Found target at begining or end of list"); // db
+                    //Console.WriteLine("Found target at begining or end of list"); // db
                     continue;
                 }
                 if (SearchSortedListFor(sortHelperA[i].DecimalRepresentation, 0, sortHelperB.Count - 1, sortHelperB))
                 {
-                    Console.WriteLine("Found target in the list"); // db
+                   // Console.WriteLine("Found target in the list"); // db
                     continue;
                 }
 
-                Console.WriteLine("Did not find target"); // db
+               // Console.WriteLine("Did not find target"); // db
                 output.Add(customListA[i]);
 
             }
@@ -163,27 +163,27 @@ namespace CustomList
         {
             
             int middleIndex = (end - start) / 2;
-            Console.WriteLine("({0}, {1}, {2})", start, end, middleIndex); // db
+           // Console.WriteLine("({0}, {1}, {2})", start, end, middleIndex); // db
             if (target.Equals(list[middleIndex]))
             {
                 return true;
             }
             else
             {
-                Console.WriteLine("In else.");
-                if(start == end)
+                //Console.WriteLine("In else.");// db
+                if (start == end)
                 {
-                    Console.WriteLine("start == end");
+                    // Console.WriteLine("start == end");// db
                     return false;
                 }
                 if (list[middleIndex].IsGreaterThan(target))
                 {
-                    Console.WriteLine("Target is in lower half.");
+                   // Console.WriteLine("Target is in lower half.");// db
                     return SearchSortedListFor(target, start, middleIndex, list);
                 }
                 if (list[middleIndex].IsLessThan(target))
                 {
-                    Console.WriteLine("Target is in upper half.");
+                   // Console.WriteLine("Target is in upper half.");// db
                     return SearchSortedListFor(target, middleIndex, end, list);
                 }
 

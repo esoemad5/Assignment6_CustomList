@@ -1055,7 +1055,7 @@ namespace CustomListTest
         */
 
         // Assert.IsTrue(ListsAreEqual(expectedResult, result));
-        private bool ListsAreEqual<T>(CustomList<T> list1, CustomList<T> list2)
+        private static bool ListsAreEqual<T>(CustomList<T> list1, CustomList<T> list2)
         {
             if (list1.Count != list2.Count)
             {
