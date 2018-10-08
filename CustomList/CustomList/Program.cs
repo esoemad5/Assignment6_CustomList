@@ -14,25 +14,21 @@ namespace CustomList
         static void Main(string[] args)
         {
 
-            CustomList<int> customList = new CustomList<int>();
-            customList.Add(4);
-            customList.Add(2);
-            customList.Add(9);
-            customList.Add(11);
-            customList.Add(8);
+            CustomList<int> list1 = new CustomList<int>();
+            CustomList<int> list2 = new CustomList<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            list2.Add(3);
+            list2.Add(4);
+            list2.Add(5);
 
             CustomList<int> expectedResult = new CustomList<int>();
+            expectedResult.Add(1);
             expectedResult.Add(2);
-            expectedResult.Add(4);
-            expectedResult.Add(8);
-            expectedResult.Add(9);
-            expectedResult.Add(11);
             //Act
-            CustomList<int> result = customList.Sort();
-
-            Console.WriteLine("Results: ");
-            Console.WriteLine("Original: {0}; Count: {1}", customList.ToString(), customList.Count);
-            Console.WriteLine("Sorted:   {0}; Count: {1}", result.ToString(), result.Count);
+            CustomList<int> result = (list1 - list2);
+            Console.WriteLine(result.ToString());
         }
         class Test
         {

@@ -141,38 +141,50 @@ namespace CustomList
 
             for(int i = 0; i < customListA.Count; i++)
             {
+                if(customListA[i].Equals(customListB[0]) || customListA[i].Equals(customListB[customListB.count - 1]))
+                {
+                    Console.WriteLine("Found target at begining or end of list"); // db
+                    continue;
+                }
                 if (SearchSortedListFor(sortHelperA[i].DecimalRepresentation, 0, sortHelperB.Count - 1, sortHelperB))
                 {
-                    // Do nothing.
+                    Console.WriteLine("Found target in the list"); // db
+                    continue;
                 }
-                else
-                {
-                    output.Add(customListA[i]);
-                }
+
+                Console.WriteLine("Did not find target"); // db
+                output.Add(customListA[i]);
+
             }
 
             return output;
         }
         private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> list)// Only use this method on <SortHelper> lists!
         {
+            
             int middleIndex = (end - start) / 2;
+            Console.WriteLine("({0}, {1}, {2})", start, end, middleIndex); // db
             if (target.Equals(list[middleIndex]))
             {
                 return true;
             }
             else
             {
+                Console.WriteLine("In else.");
                 if(start == end)
                 {
+                    Console.WriteLine("start == end");
                     return false;
                 }
                 if (list[middleIndex].IsGreaterThan(target))
                 {
-                    SearchSortedListFor(target, start, middleIndex, list);
+                    Console.WriteLine("Target is in lower half.");
+                    return SearchSortedListFor(target, start, middleIndex, list);
                 }
                 if (list[middleIndex].IsLessThan(target))
                 {
-                    SearchSortedListFor(target, middleIndex, end, list);
+                    Console.WriteLine("Target is in upper half.");
+                    return SearchSortedListFor(target, middleIndex, end, list);
                 }
 
                 throw new Exception("Not greater-than, less-than, or equal-to. Someone call Euler!!!");
