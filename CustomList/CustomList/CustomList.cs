@@ -16,7 +16,7 @@ namespace CustomList
         public int Count { get => count; }
 
         // This variable is only used for sorting and will not be instantiated until CustomList<T>.Sort is called.
-        private CustomList<CustomList<SortHelper>> sortingArrayBob;
+        private CustomList<CustomList<SortHelper>> sortHelperList2D;
 
         public T this[int i]
         {
@@ -177,9 +177,8 @@ namespace CustomList
         public CustomList<T> Sort()
         {
             
-            MakeSortingArrayBob(MakeMiniBob());
-            //Console.WriteLine(sortingArrayBob.ToString());//db
-            MergeSortBob();
+            MakeSortHelperList2D(ConvertToSortHelper());
+            MergeSort();
             CustomList<T> sortedList = ReOrderData();
 
             return sortedList;
@@ -219,33 +218,33 @@ namespace CustomList
 
             for(int i = 0; i < count; i++)
             {
-                sortedList[i] = data[sortingArrayBob[0][i].OriginalLocation];
+                sortedList[i] = data[sortHelperList2D[0][i].OriginalLocation];
             }
 
             return sortedList;
         }
-        private void MergeSortBob()
+        private void MergeSort()
         {
 
-            CustomList<CustomList<SortHelper>> nextBob = new CustomList<CustomList<SortHelper>>();
+            CustomList<CustomList<SortHelper>> next2DList = new CustomList<CustomList<SortHelper>>();
 
-            for(int i = 0; i < sortingArrayBob.Count-1; i = i + 2)
+            for(int i = 0; i < sortHelperList2D.Count-1; i = i + 2)
             {
                 CustomList<SortHelper>  nextElement = new CustomList<SortHelper>();
 
-                while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0)
+                while(sortHelperList2D[i].Count != 0 && sortHelperList2D[i+1].Count != 0)
                 {
                     try
                     {
-                        if(sortingArrayBob[i][0].DecimalRepresentation <= sortingArrayBob[i + 1][0].DecimalRepresentation)
+                        if(sortHelperList2D[i][0].DecimalRepresentation <= sortHelperList2D[i + 1][0].DecimalRepresentation)
                         {
-                            nextElement.Add(sortingArrayBob[i][0]);
-                            sortingArrayBob[i].Remove(sortingArrayBob[i][0]);
+                            nextElement.Add(sortHelperList2D[i][0]);
+                            sortHelperList2D[i].Remove(sortHelperList2D[i][0]);
                         }
                         else
                         {
-                            nextElement.Add(sortingArrayBob[i + 1][0]);
-                            sortingArrayBob[i + 1].Remove(sortingArrayBob[i + 1][0]);
+                            nextElement.Add(sortHelperList2D[i + 1][0]);
+                            sortHelperList2D[i + 1].Remove(sortHelperList2D[i + 1][0]);
                         }
                             
                     }
@@ -263,51 +262,51 @@ namespace CustomList
                         Console.WriteLine("---------------------------------------------------");
                     }
                 }
-                while(sortingArrayBob[i].Count > 0)
+                while(sortHelperList2D[i].Count > 0)
                 {
-                    nextElement.Add(sortingArrayBob[i][0]);
-                    sortingArrayBob[i].Remove(sortingArrayBob[i][0]);
+                    nextElement.Add(sortHelperList2D[i][0]);
+                    sortHelperList2D[i].Remove(sortHelperList2D[i][0]);
                 }
-                while (sortingArrayBob[i + 1].Count > 0)
+                while (sortHelperList2D[i + 1].Count > 0)
                 {
-                    nextElement.Add(sortingArrayBob[i + 1][0]);
-                    sortingArrayBob[i + 1].Remove(sortingArrayBob[i + 1][0]);
+                    nextElement.Add(sortHelperList2D[i + 1][0]);
+                    sortHelperList2D[i + 1].Remove(sortHelperList2D[i + 1][0]);
                 }
 
-                nextBob.Add(nextElement);
+                next2DList.Add(nextElement);
             }
-            if(sortingArrayBob.Count % 2 == 1)
+            if(sortHelperList2D.Count % 2 == 1)
             {
                 CustomList<SortHelper> nextElement = new CustomList<SortHelper>();
-                while (sortingArrayBob[sortingArrayBob.Count - 1].Count > 0)
+                while (sortHelperList2D[sortHelperList2D.Count - 1].Count > 0)
                 {
-                    nextElement.Add(sortingArrayBob[sortingArrayBob.Count - 1][0]);
-                    sortingArrayBob[sortingArrayBob.Count - 1].Remove(sortingArrayBob[sortingArrayBob.Count - 1][0]);
+                    nextElement.Add(sortHelperList2D[sortHelperList2D.Count - 1][0]);
+                    sortHelperList2D[sortHelperList2D.Count - 1].Remove(sortHelperList2D[sortHelperList2D.Count - 1][0]);
                 }
-                nextBob.Add(nextElement);
+                next2DList.Add(nextElement);
             }
 
-            sortingArrayBob = nextBob;
-            if(sortingArrayBob.Count > 1)
+            sortHelperList2D = next2DList;
+            if(sortHelperList2D.Count > 1)
             {
-                MergeSortBob();
+                MergeSort();
             }
         }
 
-        private void MakeSortingArrayBob(CustomList<SortHelper> miniBob)
+        private void MakeSortHelperList2D(CustomList<SortHelper> sortHelperList)
         {
-            sortingArrayBob = new CustomList<CustomList<SortHelper>>();
+            sortHelperList2D = new CustomList<CustomList<SortHelper>>();
             for(int i = 0; i < count; i++)
             {
-                sortingArrayBob.Add(new CustomList<SortHelper>());
-                sortingArrayBob[i].Add(null);
-                sortingArrayBob[i][0] = miniBob[i];
+                sortHelperList2D.Add(new CustomList<SortHelper>());
+                sortHelperList2D[i].Add(null);
+                sortHelperList2D[i][0] = sortHelperList[i];
             }
         }
 
-        private CustomList<SortHelper> MakeMiniBob()
+        private CustomList<SortHelper> ConvertToSortHelper()
         {
-            CustomList<SortHelper> miniBob = new CustomList<SortHelper>();
+            CustomList<SortHelper> sortHelperList = new CustomList<SortHelper>();
 
             try
             {
@@ -319,7 +318,7 @@ namespace CustomList
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        miniBob.Add(new SortHelper(decimal.Parse(data[i].ToString()), i)); // Converts any number type to decimal, throws FormatException for a non-string/number
+                        sortHelperList.Add(new SortHelper(decimal.Parse(data[i].ToString()), i)); // Converts any number type to decimal, throws FormatException for a non-string/number
                     }
                 }
             }
@@ -329,16 +328,16 @@ namespace CustomList
                 {
                     try
                     {
-                        miniBob.Add(new SortHelper((decimal)data[i].ToString()[0], i));// Converts strings (or Object.ToString();)
+                        sortHelperList.Add(new SortHelper((decimal)data[i].ToString()[0], i));// Converts strings (or Object.ToString();)
                     }
                     catch (IndexOutOfRangeException)
                     {
-                        miniBob.Add(new SortHelper((decimal)' ', i)); // If the string/char is: "", treat it as " "
+                        sortHelperList.Add(new SortHelper((decimal)' ', i)); // If the string/char is: "", treat it as " "
                     }
                 }
             }
 
-            return miniBob;
+            return sortHelperList;
         }
         
         
