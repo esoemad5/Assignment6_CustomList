@@ -138,7 +138,7 @@ namespace CustomList
             customListB = customListB.Sort();
             CustomList<SortHelper> sortHelperA = customListA.MakeSortHelperList();
             CustomList<SortHelper> sortHelperB = customListB.MakeSortHelperList();
-
+            Console.WriteLine(customListA.Count);
             for(int i = 0; i < customListA.Count; i++)
             {
                 if(customListA[i].Equals(customListB[0]) || customListA[i].Equals(customListB[customListB.count - 1]))
@@ -361,7 +361,8 @@ namespace CustomList
 
             try
             {
-                if (data[0] is string) // so strings like " 0823" dont get converted here
+                int test = 1;
+                if (test is string) // so strings like " 0823" dont get converted here
                 {
                     throw new FormatException();
                 }
