@@ -67,6 +67,7 @@ namespace CustomList
                 count++;
             }
         }
+
         private T[] MakeNewArray()
         {
             T[] output = new T[data.Length * 2];
@@ -76,6 +77,7 @@ namespace CustomList
             }
             return output;
         }
+
         public bool Remove(T input) // Removes the 1st occurrence of the object Returns true if removed, false if not found
         {
             T[] newData = new T[data.Length];
@@ -106,6 +108,7 @@ namespace CustomList
             }
             return foundTarget;
         }
+
         public override string ToString()
         {
             string output = "";
@@ -119,6 +122,7 @@ namespace CustomList
             }
             return output;
         }
+
         public static CustomList<T> operator +(CustomList<T> customListA, CustomList<T> customListB)
         {
             CustomList<T> output = new CustomList<T>();
@@ -132,6 +136,7 @@ namespace CustomList
             }
             return output;
         }
+
         public static CustomList<T> operator -(CustomList<T> customListA, CustomList<T> customListB) // hold off on this until after Sort.
         {
             CustomList<T> output = new CustomList<T>();
@@ -159,7 +164,8 @@ namespace CustomList
 
             return output;
         }
-        private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> list)// Only use this method on sorted <SortHelper> lists!
+
+        private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> list) // Only use this method on sorted <SortHelper> lists!
         {
 
             int middleIndex = (end - start) / 2;
@@ -185,6 +191,7 @@ namespace CustomList
                 throw new Exception("Not greater-than, less-than, or equal-to. Someone call Euler!!!");
             }
         }
+
         public static CustomList<T> Zip(CustomList<T> customListA, CustomList<T> customListB)
         {
             CustomList<T> output = new CustomList<T>();
@@ -213,6 +220,7 @@ namespace CustomList
 
             return output;
         }
+
         public CustomList<T> Sort()
         {
 
@@ -269,6 +277,7 @@ namespace CustomList
 
             return sortedList;
         }
+
         private void MergeSort()
         {
 
