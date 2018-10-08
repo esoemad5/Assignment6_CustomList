@@ -15,7 +15,7 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
-        // This variable is not be instantiated in the constructor. Call: MakeSortHelperList2D(MakeSortHelperList()); to instantiate it. Adding/removing does NOT update this list.
+        // This variable is not be instantiated in the constructor. Call: MakeSortHelperList2D(MakeSortHelperList()); to instantiate it.  This list is NEVER updated. MakeSortHelperList2D(MakeSortHelperList()); must be used to do so.
         private CustomList<CustomList<SortHelper>> sortHelperList2D;
 
         public T this[int i]
@@ -76,7 +76,7 @@ namespace CustomList
             }
             return output;
         }
-        public bool Remove(T input) // Removes the 1st occurrence of the object, true if removed, false if not found
+        public bool Remove(T input) // Removes the 1st occurrence of the object Returns true if removed, false if not found
         {
             T[] newData = new T[data.Length];
             bool foundTarget = false;
@@ -138,7 +138,6 @@ namespace CustomList
             customListB = customListB.Sort();
             CustomList<SortHelper> sortHelperA = customListA.MakeSortHelperList();
             CustomList<SortHelper> sortHelperB = customListB.MakeSortHelperList();
-            Console.WriteLine(customListA.Count);
             if (customListA.Count == 0 || customListB.Count == 0)
             {
                 return customListA;
@@ -147,47 +146,39 @@ namespace CustomList
             {
                 if (customListA[i].Equals(customListB[0]) || customListA[i].Equals(customListB[customListB.count - 1]))
                 {
-                    //Console.WriteLine("Found target at begining or end of list"); // db
                     continue;
                 }
                 if (SearchSortedListFor(sortHelperA[i].DecimalRepresentation, 0, sortHelperB.Count - 1, sortHelperB))
                 {
-                    // Console.WriteLine("Found target in the list"); // db
                     continue;
                 }
 
-                // Console.WriteLine("Did not find target"); // db
                 output.Add(customListA[i]);
 
             }
 
             return output;
         }
-        private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> list)// Only use this method on <SortHelper> lists!
+        private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> list)// Only use this method on sorted <SortHelper> lists!
         {
 
             int middleIndex = (end - start) / 2;
-            // Console.WriteLine("({0}, {1}, {2})", start, end, middleIndex); // db
             if (target.Equals(list[middleIndex]))
             {
                 return true;
             }
             else
             {
-                //Console.WriteLine("In else.");// db
                 if (start == end)
                 {
-                    // Console.WriteLine("start == end");// db
                     return false;
                 }
                 if (list[middleIndex].IsGreaterThan(target))
                 {
-                    // Console.WriteLine("Target is in lower half.");// db
                     return SearchSortedListFor(target, start, middleIndex, list);
                 }
                 if (list[middleIndex].IsLessThan(target))
                 {
-                    // Console.WriteLine("Target is in upper half.");// db
                     return SearchSortedListFor(target, middleIndex, end, list);
                 }
 
@@ -305,7 +296,6 @@ namespace CustomList
                     }
                     catch (ArgumentOutOfRangeException ex)
                     {
-                        Console.WriteLine("---------------------------------------------------");
                         Console.WriteLine("Out of range inside while loop of MergeSort. This should be impossible.");
                         // Get stack trace for the exception with source file information
                         var st = new StackTrace(ex, true);
@@ -314,7 +304,6 @@ namespace CustomList
                         // Get the line number from the stack frame
                         var line = frame.GetFileLineNumber();
                         Console.WriteLine(st);
-                        Console.WriteLine("---------------------------------------------------");
                     }
                 }
                 while (sortHelperList2D[i].Count > 0)

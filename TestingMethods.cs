@@ -1,33 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CustomList
-{
-
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("-----------------");
-            CustomList<int> A = new CustomList<int>();
-            CustomList<int> B = new CustomList<int>();
-            a(A.Sort());
-            A = A - B;
-            a(A);
-
-
-
-
-
-        }
-        private static void a(Object A)
-        {
-            Console.WriteLine(A.ToString());
-        }
+        
+        /* These methods were used in Main() to test and debug the CustomList class.
+         * I have removed them from the Program class to clean things up.
+         * They have been placed here in case they are needed again.
+         */
+        
+        
         class Test
         {
             public List<decimal> list;
@@ -217,27 +194,3 @@ namespace CustomList
             }
             return true;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-}
