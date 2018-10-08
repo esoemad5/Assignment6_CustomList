@@ -14,7 +14,26 @@ namespace CustomList
         {
             CustomList<int> A = new CustomList<int>();
             CustomList<int> B = new CustomList<int>();
-            CustomList<int> C = A - B;
+            A.Add(5);
+            A.Add(7);
+            A.Add(5);
+            A.Add(7);
+            A.Add(5);
+            A.Add(7);
+            B.Add(1);
+            CustomList<string> S = new CustomList<string>();
+            S.Add("1234");
+            S.Add(" 234");
+            S.Add(" ");
+            S.Add("");
+            S.Add("!");
+            S.Add("123Abc");
+            S.Add("Yoooooooooooooo");
+            S.Add("yoooooooooooooo");
+            S.Add("Yoooooooooooooo");
+
+            CustomList<string> C =S.Sort();
+            Console.WriteLine(C.ToString());
         }
     }
 }

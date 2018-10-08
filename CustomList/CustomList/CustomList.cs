@@ -15,7 +15,11 @@ namespace CustomList
         private int count;
         public int Count { get => count; }
 
-        // This variable is not be instantiated in the constructor. Call: MakeSortHelperList2D(MakeSortHelperList()); to instantiate it.  This list is NEVER updated. MakeSortHelperList2D(MakeSortHelperList()); must be used to do so.
+        /* This variable is not be instantiated in the constructor.
+         * It is primarily used for sorting.
+         * Use MakeSortHelperList2D(MakeSortHelperList()); to instantiate it.
+         * This list is NEVER updated. MakeSortHelperList2D(MakeSortHelperList()); must be used to do so.
+         */
         private CustomList<CustomList<SortHelper>> sortHelperList2D;
 
         public T this[int i]
@@ -78,14 +82,14 @@ namespace CustomList
             return output;
         }
 
-        public bool Remove(T input) // Removes the 1st occurrence of the object Returns true if removed, false if not found
+        public bool Remove(T target) // Removes the 1st occurrence of target. Returns true if removed or false if not found.
         {
             T[] newData = new T[data.Length];
             bool foundTarget = false;
 
             for (int i = 0; i < count; i++)
             {
-                if (data[i].Equals(input) && !foundTarget)
+                if (data[i].Equals(target) && !foundTarget)
                 {
                     foundTarget = true;
                 }
@@ -137,16 +141,16 @@ namespace CustomList
             return output;
         }
 
-        public static CustomList<T> operator -(CustomList<T> customListA, CustomList<T> customListB) // hold off on this until after Sort.
+        public static CustomList<T> operator -(CustomList<T> customListA, CustomList<T> customListB)
         {
-            CustomList<T> output = new CustomList<T>();
-            customListB = customListB.Sort();
-            CustomList<SortHelper> sortHelperA = customListA.MakeSortHelperList();
-            CustomList<SortHelper> sortHelperB = customListB.MakeSortHelperList();
             if (customListA.Count == 0 || customListB.Count == 0)
             {
                 return customListA;
             }
+            CustomList<T> output = new CustomList<T>();
+            customListB = customListB.Sort();
+            CustomList<SortHelper> sortHelperA = customListA.MakeSortHelperList();
+            CustomList<SortHelper> sortHelperB = customListB.MakeSortHelperList();
             for (int i = 0; i < customListA.Count; i++)
             {
                 if (customListA[i].Equals(customListB[0]) || customListA[i].Equals(customListB[customListB.count - 1]))
@@ -165,11 +169,11 @@ namespace CustomList
             return output;
         }
 
-        private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> list) // Only use this method on sorted <SortHelper> lists!
+        private static bool SearchSortedListFor(decimal target, int start, int end, CustomList<SortHelper> sortedList)
         {
 
             int middleIndex = (end - start) / 2;
-            if (target.Equals(list[middleIndex]))
+            if (target.Equals(sortedList[middleIndex]))
             {
                 return true;
             }
@@ -179,13 +183,13 @@ namespace CustomList
                 {
                     return false;
                 }
-                if (list[middleIndex].IsGreaterThan(target))
+                if (sortedList[middleIndex].IsGreaterThan(target))
                 {
-                    return SearchSortedListFor(target, start, middleIndex, list);
+                    return SearchSortedListFor(target, start, middleIndex, sortedList);
                 }
-                if (list[middleIndex].IsLessThan(target))
+                if (sortedList[middleIndex].IsLessThan(target))
                 {
-                    return SearchSortedListFor(target, middleIndex, end, list);
+                    return SearchSortedListFor(target, middleIndex, end, sortedList);
                 }
 
                 throw new Exception("Not greater-than, less-than, or equal-to. Someone call Euler!!!");
@@ -196,7 +200,10 @@ namespace CustomList
         {
             CustomList<T> output = new CustomList<T>();
             int stop = customListA.Count;
-            if (customListA.Count < customListB.Count) { stop = customListB.Count; }
+            if (customListA.Count < customListB.Count)
+            {
+                stop = customListB.Count;
+            }
 
             for (int i = 0; i < stop; i++)
             {
@@ -204,17 +211,15 @@ namespace CustomList
                 {
                     output.Add(customListA[i]);
                 }
-                catch (ArgumentOutOfRangeException e)
+                catch (ArgumentOutOfRangeException)
                 {
-                    Console.WriteLine(e.Message);
                 }
                 try
                 {
                     output.Add(customListB[i]);
                 }
-                catch (ArgumentOutOfRangeException e)
+                catch (ArgumentOutOfRangeException)
                 {
-                    Console.WriteLine(e.Message);
                 }
             }
 
@@ -272,7 +277,7 @@ namespace CustomList
 
             for (int i = 0; i < count; i++)
             {
-                sortedList[i] = data[sortHelperList2D[0][i].OriginalLocation];
+                sortedList[i] = this.data[sortHelperList2D[0][i].OriginalLocation];
             }
 
             return sortedList;
@@ -283,7 +288,7 @@ namespace CustomList
 
             CustomList<CustomList<SortHelper>> next2DList = new CustomList<CustomList<SortHelper>>();
 
-            for (int i = 0; i < sortHelperList2D.Count - 1; i = i + 2)
+            for (int i = 0; i < sortHelperList2D.Count - 1; i = i + 2) // Merge lists 2 by 2
             {
                 CustomList<SortHelper> nextElement = new CustomList<SortHelper>();
 
@@ -328,10 +333,10 @@ namespace CustomList
 
                 next2DList.Add(nextElement);
             }
-            if (sortHelperList2D.Count % 2 == 1)
+            if (sortHelperList2D.Count % 2 == 1) // If there are an odd number of lists, add the last one to the end of the next 2D list
             {
                 CustomList<SortHelper> nextElement = new CustomList<SortHelper>();
-                while (sortHelperList2D[sortHelperList2D.Count - 1].Count > 0)
+                while (sortHelperList2D[sortHelperList2D.Count - 1].Count > 0)// Can probably make this more efficient. Will try after this commit
                 {
                     nextElement.Add(sortHelperList2D[sortHelperList2D.Count - 1][0]);
                     sortHelperList2D[sortHelperList2D.Count - 1].Remove(sortHelperList2D[sortHelperList2D.Count - 1][0]);
@@ -352,8 +357,7 @@ namespace CustomList
             for (int i = 0; i < count; i++)
             {
                 sortHelperList2D.Add(new CustomList<SortHelper>());
-                sortHelperList2D[i].Add(null);
-                sortHelperList2D[i][0] = sortHelperList[i];
+                sortHelperList2D[i].Add(sortHelperList[i]);
             }
         }
 
@@ -363,8 +367,7 @@ namespace CustomList
 
             try
             {
-                int test = 1;
-                if (test is string) // so strings like " 0823" dont get converted here
+                if (data[0] is string) // so strings like " 0823" dont get converted here
                 {
                     throw new FormatException();
                 }
@@ -397,6 +400,5 @@ namespace CustomList
 
             return sortHelperList;
         }
-
     }
 }
