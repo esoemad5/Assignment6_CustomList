@@ -231,18 +231,10 @@ namespace CustomList
 
             for(int i = 0; i < sortingArrayBob.Count-1; i = i + 2)
             {
-
-                int whileLoopCounter = 0;//debuggingLine
-
                 CustomList<SortHelper>  nextElement = new CustomList<SortHelper>();
 
                 while(sortingArrayBob[i].Count != 0 && sortingArrayBob[i+1].Count != 0)
                 {
-                    Console.WriteLine("i: {0}, WLC: {1}", i, whileLoopCounter);//debuggingLine
-                    Console.WriteLine("Bob: {0}, InnerBobLeft: {1}, InnerBobRight: {2}", sortingArrayBob.Count, sortingArrayBob[i].Count, sortingArrayBob[i + 1].Count);//db
-                    whileLoopCounter++;//db
-                    Console.WriteLine("---------------------------------------------------");
-
                     try
                     {
                         if(sortingArrayBob[i][0].DecimalRepresentation <= sortingArrayBob[i + 1][0].DecimalRepresentation)
@@ -268,7 +260,6 @@ namespace CustomList
                         // Get the line number from the stack frame
                         var line = frame.GetFileLineNumber();
                         Console.WriteLine(st);
-
                         Console.WriteLine("---------------------------------------------------");
                     }
                 }
@@ -320,7 +311,6 @@ namespace CustomList
 
             try
             {
-                // make sure sorting function just returns for length zero lists or this will throw an exception
                 if (data[0] is string) // so strings like " 0823" dont get converted here
                 {
                     throw new FormatException();
@@ -329,11 +319,11 @@ namespace CustomList
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        miniBob.Add(new SortHelper(decimal.Parse(data[i].ToString()), i)); // Converts any number type to decimal, throws exception for a non-string/number
+                        miniBob.Add(new SortHelper(decimal.Parse(data[i].ToString()), i)); // Converts any number type to decimal, throws FormatException for a non-string/number
                     }
                 }
             }
-            catch (FormatException) // convert anything thats not a number
+            catch (FormatException) // convert anything that is not a number
             {
                 for (int i = 0; i < count; i++)
                 {
@@ -343,7 +333,7 @@ namespace CustomList
                     }
                     catch (IndexOutOfRangeException)
                     {
-                        miniBob.Add(new SortHelper((decimal)' ', i)); // If the string/char is: ""
+                        miniBob.Add(new SortHelper((decimal)' ', i)); // If the string/char is: "", treat it as " "
                     }
                 }
             }
@@ -351,153 +341,6 @@ namespace CustomList
             return miniBob;
         }
         
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Obsolete. Remove before submitting
-        private decimal[] ConvertToNumber() 
-        {
-            decimal[] output = new decimal[count];
-
-            try
-            {
-                // make sure sorting function just returns for length zero lists or this will throw an exception
-                if (data[0] is string) // so strings like " 0823" dont get converted here
-                {
-                    throw new FormatException();
-                }
-                else
-                {
-                    for(int i = 0; i < count; i++)
-                    {
-                        output[i] = decimal.Parse(data[i].ToString()); // Converts numbers, throws exception for a non-string/number
-                    }
-                }
-            }
-            catch (FormatException) // convert anything thats not a number
-            {
-                for(int i = 0; i < count; i++)
-                {
-                    try
-                    {
-                        output[i] = (decimal)data[i].ToString()[0];// Converts strings (or Object.ToString();)
-                    }
-                    catch (IndexOutOfRangeException)
-                    {
-                        output[i] = (decimal)' '; // If the string/char is: ""
-                    }
-                }
-            }
-            return output;
-        }
-
-        private int[] MergeSortButReturnArrayOfIndicesOfOriginalPositions(decimal[] array) // TODO
-        {
-            int[] indices = new int[array.Length];
-            CustomList<CustomList<decimal>> list2D = ChangeArrayTo2DCustomList(array);
-
-            while (list2D.Count != 1)
-            {
-                CustomList<CustomList<decimal>> nextList = new CustomList<CustomList<decimal>>();
-                for (int i = 0; i < list2D.Count; i = i + 2)
-                {
-                    try
-                    {
-                        // merge lists 2 by 2
-                        // store lists in nextList
-                        CustomList<decimal> element = new CustomList<decimal>();
-
-                        CustomList<decimal> section1 = list2D[i];
-                        CustomList<decimal> section2 = list2D[i+1];
-
-                        for (int j = 0; j < section1.Count; j++) // this might be totally bad
-                        {
-                            for(int k = 0; k < section2.Count; k++)
-                            {
-                                //if(section1[j])
-                            }
-                        }
-                        nextList.Add(element);
-                        // note the indices in indices when swapping
-                    }
-                    catch (ArgumentOutOfRangeException)
-                    {
-                        // if there are an odd number of lists, just add the last one to the end of nextList
-                        nextList[i] = list2D[i];
-                        if(i != list2D.Count)
-                        {
-                            throw new Exception("There are still lists left in list2D that have not been sorted.");
-                        }
-                    }
-                }
-                list2D = nextList;
-            }
-            return indices;
-        }
-
-        private CustomList<CustomList<decimal>> ChangeArrayTo2DCustomList(decimal[] array)
-        {
-            CustomList<CustomList<decimal>> list2D = new CustomList<CustomList<decimal>>();
-            foreach(decimal number in array)
-            {
-                CustomList<decimal> element = new CustomList<decimal>();
-                element.Add(number);
-                list2D.Add(element);
-            }
-            return list2D;
-        }
-
-        private void ReOrderList(int[] indices)
-        {
-            T[] newData = new T[count];
-            for(int i = 0; i < count; i++)
-            {
-                newData[i] = data[indices[i]];
-            }
-            data = newData;
-        }
-
         
     }
 }
