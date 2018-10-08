@@ -333,15 +333,9 @@ namespace CustomList
 
                 next2DList.Add(nextElement);
             }
-            if (sortHelperList2D.Count % 2 == 1) // If there are an odd number of lists, add the last one to the end of the next 2D list
+            if (sortHelperList2D.Count % 2 == 1)
             {
-                CustomList<SortHelper> nextElement = new CustomList<SortHelper>();
-                while (sortHelperList2D[sortHelperList2D.Count - 1].Count > 0)// Can probably make this more efficient. Will try after this commit
-                {
-                    nextElement.Add(sortHelperList2D[sortHelperList2D.Count - 1][0]);
-                    sortHelperList2D[sortHelperList2D.Count - 1].Remove(sortHelperList2D[sortHelperList2D.Count - 1][0]);
-                }
-                next2DList.Add(nextElement);
+                next2DList.Add(sortHelperList2D[sortHelperList2D.Count - 1]);
             }
 
             sortHelperList2D = next2DList;

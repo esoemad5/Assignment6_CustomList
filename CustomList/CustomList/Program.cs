@@ -32,8 +32,17 @@ namespace CustomList
             S.Add("yoooooooooooooo");
             S.Add("Yoooooooooooooo");
 
+            Random rand = new Random();
+            CustomList<int> I = new CustomList<int>();
+            while(I.Count < 100)
+            {
+                I.Add(rand.Next(0, 100));
+            }
+
             CustomList<string> C =S.Sort();
             Console.WriteLine(C.ToString());
+            CustomList<int> T = I.Sort();
+            Console.WriteLine(T.ToString());
         }
     }
 }
