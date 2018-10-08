@@ -25,6 +25,8 @@ namespace CustomList
             Console.WriteLine(expectedResult.ToString());
             Console.WriteLine(result.ToString());
             Console.WriteLine(ListsAreEqual(expectedResult, result));
+            Object a = new CustomList<int>();
+            
 
 
         }
